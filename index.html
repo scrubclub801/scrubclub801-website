@@ -3,31 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scrub Club 801 | Home Cleaning in Draper, Utah</title>
-  <meta name="description" content="Scrub Club 801 offers thoughtful home cleaning, deep cleaning, recurring cleaning, and move-in or move-out cleaning in Draper and surrounding Utah communities." />
-  <meta property="og:title" content="Scrub Club 801 | Home Cleaning in Draper, Utah" />
-  <meta property="og:description" content="Fresh, reliable home cleaning from a local business founded by two friends." />
+  <title>Scrub Club 801 | Home</title>
+  <meta
+    name="description"
+    content="Scrub Club 801 offers thoughtful home cleaning, detailing, and specialty care based in Draper, Utah."
+  />
+  <meta property="og:title" content="Scrub Club 801 | Home Cleaning in Draper, UT" />
+  <meta
+    property="og:description"
+    content="Boutique cleaning, detailing, and specialty care serving Draper and nearby Utah communities."
+  />
   <meta property="og:type" content="website" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
-      --navy: #0c2541;
-      --blue: #2778ff;
-      --blue-dark: #1657c9;
-      --ice: #eff8ff;
-      --aqua: #b8f0eb;
-      --mint: #dff9f4;
-      --white: #ffffff;
-      --gray: #64748b;
-      --line: rgba(12, 37, 65, 0.12);
-      --shadow: 0 25px 80px rgba(33, 103, 190, 0.16);
-      --radius: 28px;
-      --serif: "Instrument Serif", Georgia, serif;
-      --sans: "DM Sans", Arial, sans-serif;
+      --powder-blue: #c9dfeb;
+      --icy-aqua: #eaf9f7;
+      --warm-white: #f8fcfd;
+      --mist-gray: #edf7fc;
+      --deep-navy: #23354d;
+      --bright-blue: #66c6f2;
+      --line-blue: #cfe6f1;
+      --text-muted: #4b6178;
+      --serif: "Fraunces", "Times New Roman", serif;
+      --sans: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
     }
 
     * {
@@ -36,15 +42,19 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html,
+    body {
+      min-height: 100%;
     }
 
     body {
       font-family: var(--sans);
-      color: var(--navy);
-      background: var(--white);
-      line-height: 1.6;
+      color: var(--deep-navy);
+      background:
+        radial-gradient(56% 42% at 90% 8%, rgba(234, 249, 247, 0.28), rgba(248, 252, 253, 0) 74%),
+        radial-gradient(50% 38% at 12% 92%, rgba(237, 247, 252, 0.24), rgba(248, 252, 253, 0) 72%),
+        var(--warm-white);
+      line-height: 1.66;
       overflow-x: hidden;
     }
 
@@ -58,44 +68,220 @@
     select,
     textarea {
       font: inherit;
+      color: inherit;
     }
 
     .container {
-      width: min(1180px, calc(100% - 40px));
+      width: min(1160px, calc(100% - 56px));
       margin: 0 auto;
     }
 
-    .eyebrow {
+    .site-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .site-shell::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        repeating-linear-gradient(0deg, rgba(24, 48, 74, 0.012) 0, rgba(24, 48, 74, 0.012) 1px, transparent 1px, transparent 56px),
+        repeating-linear-gradient(90deg, rgba(24, 48, 74, 0.008) 0, rgba(24, 48, 74, 0.008) 1px, transparent 1px, transparent 72px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line-blue);
+      background: rgba(248, 252, 253, 0.9);
+      backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .topbar.is-scrolled {
+      background: rgba(252, 253, 252, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-row {
+      min-height: 78px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .logo {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.73rem;
+      gap: 0;
+      font-size: 1.08rem;
       font-weight: 700;
-      color: var(--blue);
+      letter-spacing: 0.02em;
+      color: var(--deep-navy);
+      white-space: nowrap;
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 1px;
-      background: currentColor;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    h1, h2, h3 {
+    .nav-link {
+      border-bottom: 1px solid transparent;
+      padding: 8px 0;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      color: var(--deep-navy);
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .nav-link.active {
+      color: var(--bright-blue);
+      border-bottom-color: var(--bright-blue);
+    }
+
+    .header-cta {
+      min-height: 44px;
+      padding: 0 18px;
+      font-size: 0.79rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .mobile-toggle {
+      display: none;
+      border: 1px solid var(--line-blue);
+      background: rgba(255, 255, 255, 0.92);
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-direction: column;
+      border-radius: 10px;
+    }
+
+    .mobile-toggle-line {
+      width: 16px;
+      height: 1.6px;
+      background: var(--deep-navy);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .mobile-toggle[aria-expanded="true"] .mobile-toggle-line:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    .mobile-toggle[aria-expanded="true"] .mobile-toggle-line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-toggle[aria-expanded="true"] .mobile-toggle-line:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+
+    .view-wrap {
+      position: relative;
+      background: transparent;
+    }
+
+    .view {
+      display: none;
+      min-height: calc(100vh - 75px);
+      padding: clamp(82px, 8vw, 124px) 0;
+      position: relative;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .view-title {
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bright-blue);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    h1,
+    h2,
+    h3 {
       font-family: var(--serif);
-      font-weight: 400;
-      line-height: 0.98;
+      font-weight: 600;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      color: var(--deep-navy);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      max-width: 760px;
     }
 
     h2 {
-      font-size: clamp(3rem, 7vw, 6.3rem);
-      letter-spacing: -0.045em;
+      font-size: clamp(2rem, 4.6vw, 3.3rem);
+      max-width: 720px;
+    }
+
+    h3 {
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.24;
+      letter-spacing: 0;
+      font-family: var(--sans);
     }
 
     p {
-      color: var(--gray);
+      color: var(--text-muted);
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      max-width: 760px;
+      padding: clamp(8px, 2vw, 22px) 0 clamp(52px, 7vw, 94px);
+    }
+
+    .hero-slogan {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-top: 4px;
+      color: color-mix(in srgb, var(--deep-navy) 84%, transparent);
+    }
+
+    .hero-copy {
+      max-width: 46ch;
+      font-size: 1.05rem;
+      margin-top: 24px;
+    }
+
+    .hero-actions {
+      margin-top: 42px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .btn {
@@ -103,541 +289,377 @@
       align-items: center;
       justify-content: center;
       min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
+      padding: 0 30px;
       border: 1px solid transparent;
-      font-weight: 700;
-      transition: 0.25s ease;
+      border-radius: 18px;
       cursor: pointer;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .btn-primary {
-      color: white;
-      background: var(--blue);
-      box-shadow: 0 14px 35px rgba(39, 120, 255, 0.28);
+      background: var(--bright-blue);
+      border-color: var(--bright-blue);
+      color: #ffffff;
     }
 
-    .btn-primary:hover {
-      background: var(--blue-dark);
-      transform: translateY(-2px);
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: #53b8ea;
+      border-color: #53b8ea;
     }
 
     .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(14px);
+      background: #ddf7ff;
+      border-color: var(--line-blue);
+      color: var(--deep-navy);
     }
 
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      border-color: var(--bright-blue);
+      color: var(--bright-blue);
+      background: #eefbff;
     }
 
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 50;
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(12, 37, 65, 0.08);
-    }
-
-    .nav {
-      min-height: 78px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .logo {
-      font-family: var(--serif);
-      font-size: 1.75rem;
-      letter-spacing: -0.04em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-    }
-
-    .logo-mark {
-      width: 31px;
-      height: 31px;
-      border: 1.5px solid var(--blue);
-      border-radius: 50%;
-      position: relative;
-      box-shadow: 0 0 25px rgba(39,120,255,.25);
-    }
-
-    .logo-mark::before,
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: var(--aqua);
-    }
-
-    .logo-mark::before {
-      width: 9px;
-      height: 9px;
-      top: 4px;
-      right: 3px;
-    }
-
-    .logo-mark::after {
-      width: 5px;
-      height: 5px;
-      left: 6px;
-      bottom: 5px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      font-size: 0.94rem;
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: var(--blue);
-    }
-
-    .menu-btn {
-      display: none;
-      border: 0;
-      background: none;
-      font-size: 1.6rem;
-      cursor: pointer;
-    }
-
-    .hero {
-      min-height: 100vh;
-      padding: 145px 0 70px;
-      position: relative;
-      background:
-        radial-gradient(circle at 85% 15%, rgba(184, 240, 235, 0.8), transparent 20%),
-        radial-gradient(circle at 66% 44%, rgba(39, 120, 255, 0.14), transparent 24%),
-        linear-gradient(180deg, #f7fcff 0%, #ffffff 100%);
-      display: flex;
-      align-items: center;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      right: -180px;
-      top: 120px;
-      border: 1px solid rgba(39,120,255,.18);
-      border-radius: 50%;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 90px;
-      height: 90px;
-      left: 7%;
-      top: 25%;
-      border-radius: 50%;
-      background: rgba(184, 240, 235, 0.3);
-      border: 1px solid rgba(39,120,255,.18);
-      box-shadow: 0 0 60px rgba(39,120,255,.2);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 70px;
-      align-items: end;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero h1 {
-      font-size: clamp(4.4rem, 10vw, 9.4rem);
-      letter-spacing: -0.065em;
-      max-width: 920px;
-      margin: 22px 0 28px;
-    }
-
-    .hero h1 em {
-      color: var(--blue);
-      font-weight: 400;
-    }
-
-    .hero-copy {
-      max-width: 600px;
-      font-size: 1.12rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .hero-side {
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-      align-self: end;
-    }
-
-    .hero-side strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1rem;
-    }
-
-    .mini-stat {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      padding: 17px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: .95rem;
-    }
-
-    .mini-stat span:last-child {
-      color: var(--blue);
-      font-weight: 700;
-    }
-
-    .trust-strip {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: var(--white);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-    }
-
-    .trust-grid div {
-      padding: 22px 18px;
-      text-align: center;
-      border-right: 1px solid var(--line);
-      font-size: .84rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .09em;
-    }
-
-    .trust-grid div:last-child {
-      border-right: 0;
-    }
-
-    section {
-      padding: 120px 0;
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 90px;
-      align-items: start;
-    }
-
-    .intro-copy {
-      max-width: 750px;
-    }
-
-    .intro-copy p {
-      font-size: 1.1rem;
-      max-width: 640px;
-      margin-top: 28px;
-    }
-
-    .signature {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 2rem;
-      margin-top: 34px;
-      color: var(--navy);
-    }
-
-    .services {
-      background: var(--ice);
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 40px;
-      margin-bottom: 65px;
-    }
-
-    .section-head p {
-      max-width: 430px;
-    }
-
-    .services-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .service-row {
-      display: grid;
-      grid-template-columns: 80px 1fr 1fr auto;
-      gap: 30px;
-      align-items: center;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--line);
-      transition: .25s ease;
-    }
-
-    .service-row:hover {
-      padding-left: 12px;
-      color: var(--blue);
-    }
-
-    .service-number {
-      color: var(--blue);
-      font-weight: 700;
-    }
-
-    .service-row h3 {
-      font-family: var(--serif);
-      font-size: 2.25rem;
-    }
-
-    .service-row p {
-      font-size: .96rem;
-    }
-
-    .service-arrow {
-      font-size: 1.5rem;
+    .section-block {
+      padding-top: clamp(56px, 7vw, 98px);
+      border-top: 1px solid var(--line-blue);
     }
 
     .why-grid {
+      margin-top: 28px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--line-blue);
+      border-left: 1px solid var(--line-blue);
+    }
+
+    .why-item {
+      border-right: 1px solid var(--line-blue);
+      border-bottom: 1px solid var(--line-blue);
+      padding: 22px 18px;
+      display: grid;
+      gap: 8px;
+      background: transparent;
+    }
+
+    .why-item p {
+      max-width: 40ch;
+      font-size: 0.98rem;
+    }
+
+    .service-divider {
+      width: min(320px, 58%);
+      height: 1px;
+      margin: 20px auto 24px;
+      background: color-mix(in srgb, var(--line-blue) 84%, white);
+    }
+
+    .service-kicker {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bright-blue);
+      font-weight: 600;
+    }
+
+    .service-grid {
+      margin: 0 auto;
+      max-width: 620px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 22px;
       align-items: start;
     }
 
-    .why-statement {
-      position: sticky;
-      top: 120px;
-    }
-
-    .reason-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .reason {
-      padding: 34px 0;
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: 20px;
-    }
-
-    .reason-index {
-      color: var(--blue);
-      font-weight: 700;
-    }
-
-    .reason h3 {
-      font-family: var(--sans);
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-
-    .checklist-section {
-      background: var(--navy);
-      color: white;
-    }
-
-    .checklist-section p {
-      color: rgba(255,255,255,.68);
-    }
-
-    .checklist-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      margin-top: 55px;
-      border-top: 1px solid rgba(255,255,255,.14);
-      border-bottom: 1px solid rgba(255,255,255,.14);
-    }
-
-    .check-item {
-      padding: 32px 22px;
-      border-right: 1px solid rgba(255,255,255,.14);
-      min-height: 220px;
-    }
-
-    .check-item:last-child {
-      border-right: 0;
-    }
-
-    .check-item span {
-      color: var(--aqua);
-      font-size: 1.4rem;
-    }
-
-    .check-item h3 {
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 700;
-      margin: 18px 0 14px;
-    }
-
-    .check-item ul {
-      list-style: none;
-      color: rgba(255,255,255,.68);
-      font-size: .9rem;
-    }
-
-    .areas-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .area-cloud {
-      position: relative;
-      min-height: 520px;
-      background:
-        radial-gradient(circle at center, rgba(39,120,255,.16), transparent 44%),
-        var(--ice);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 0 1px rgba(39,120,255,.12);
-    }
-
-    .area-core {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: var(--blue);
-      color: white;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      box-shadow: 0 25px 70px rgba(39,120,255,.35);
-      position: relative;
-      z-index: 2;
-      font-weight: 700;
-    }
-
-    .area-tag {
-      position: absolute;
-      padding: 9px 13px;
-      border: 1px solid rgba(39,120,255,.18);
-      background: rgba(255,255,255,.88);
-      backdrop-filter: blur(10px);
+    .service-cell {
+      border: 1px solid color-mix(in srgb, var(--line-blue) 88%, white);
+      background: #ffffff;
       border-radius: 999px;
-      font-size: .84rem;
-      box-shadow: 0 12px 25px rgba(12,37,65,.08);
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      color: var(--deep-navy);
+      text-align: center;
+      letter-spacing: 0.01em;
     }
 
-    .area-tag:nth-child(2){top: 8%; left: 34%;}
-    .area-tag:nth-child(3){top: 18%; right: 6%;}
-    .area-tag:nth-child(4){top: 42%; right: -2%;}
-    .area-tag:nth-child(5){bottom: 17%; right: 8%;}
-    .area-tag:nth-child(6){bottom: 5%; left: 35%;}
-    .area-tag:nth-child(7){bottom: 18%; left: 3%;}
-    .area-tag:nth-child(8){top: 42%; left: -2%;}
-    .area-tag:nth-child(9){top: 18%; left: 8%;}
-
-    .area-list {
-      columns: 2;
-      list-style: none;
-      margin: 30px 0;
-      gap: 40px;
+    .service-nearby {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--deep-navy);
+      font-weight: 500;
     }
 
-    .area-list li {
-      padding: 8px 0;
-      border-bottom: 1px solid var(--line);
-      break-inside: avoid;
-    }
-
-    .faq {
-      background: #f8fbfd;
-    }
-
-    .faq-grid {
+    .steps-grid {
+      margin-top: 30px;
       display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 80px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 30px);
     }
 
-    .accordion {
-      border-top: 1px solid var(--line);
+    .step-item {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .step-number {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 0.9;
+      color: color-mix(in srgb, var(--bright-blue) 72%, #9bdcf8);
+      font-weight: 600;
+      font-family: var(--serif);
+    }
+
+    .step-item p {
+      color: var(--deep-navy);
+      font-size: 0.98rem;
+      max-width: 18ch;
+    }
+
+    .faq-list {
+      margin-top: 24px;
+      max-width: 760px;
+      border-top: 1px solid var(--line-blue);
     }
 
     .faq-item {
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--line-blue);
     }
 
-    .faq-question {
+    .faq-trigger {
       width: 100%;
+      text-align: left;
       border: 0;
       background: transparent;
-      padding: 23px 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      text-align: left;
+      color: var(--deep-navy);
+      padding: 15px 0;
+      font-size: 0.99rem;
+      font-weight: 600;
       cursor: pointer;
-      font-weight: 700;
-      color: var(--navy);
     }
 
-    .faq-answer {
-      display: none;
-      padding: 0 0 24px;
-      max-width: 680px;
+    .faq-trigger:hover,
+    .faq-trigger:focus-visible {
+      color: var(--bright-blue);
     }
 
-    .faq-item.open .faq-answer {
-      display: block;
+    .faq-panel {
+      padding: 0 0 14px;
     }
 
-    .quote-section {
-      background:
-        radial-gradient(circle at 90% 10%, rgba(184,240,235,.85), transparent 24%),
-        linear-gradient(180deg, #eff8ff, white);
+    .faq-panel p {
+      max-width: 58ch;
+      font-size: 0.97rem;
     }
 
-    .quote-grid {
+    .home-footer {
+      margin-top: clamp(62px, 8vw, 108px);
+      background: #ffffff;
+      padding-top: clamp(40px, 6vw, 68px);
+      padding-bottom: clamp(86px, 10vw, 132px);
       display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 80px;
+      gap: clamp(30px, 4vw, 44px);
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(36px, 5vw, 72px);
       align-items: start;
     }
 
-    .quote-card {
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(39,120,255,.12);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 34px;
+    .footer-left {
+      display: grid;
+      gap: 18px;
+      max-width: 480px;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      font-weight: 600;
+      color: var(--deep-navy);
+      font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-description {
+      color: var(--deep-navy);
+      font-size: 1rem;
+      max-width: 42ch;
+      line-height: 1.72;
+    }
+
+    .footer-meta {
+      display: grid;
+      gap: 6px;
+      font-size: 0.97rem;
+      color: var(--text-muted);
+    }
+
+    .footer-email {
+      width: fit-content;
+      color: var(--bright-blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .footer-right {
+      display: grid;
+      justify-items: start;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .footer-social-heading {
+      font-family: var(--serif);
+      font-weight: 600;
+      color: var(--deep-navy);
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      letter-spacing: -0.01em;
+      line-height: 1.04;
+    }
+
+    .footer-social-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-social-link {
+      color: var(--deep-navy);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
+      color: var(--bright-blue);
+      transform: translateY(-3px);
+    }
+
+    .footer-social-link svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+      display: block;
+    }
+
+    .footer-handle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-quote-btn {
+      margin-top: 6px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line-blue);
+      padding-top: 18px;
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      letter-spacing: 0.01em;
+    }
+
+    .sticky-book {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 45;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sticky-book.hidden {
+      display: none;
+    }
+
+    .book-btn {
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      border: 1px solid var(--bright-blue);
+      background: var(--bright-blue);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .book-btn:hover,
+    .book-btn:focus-visible {
+      background: #53b8ea;
+      border-color: #53b8ea;
+    }
+
+    .book-dismiss {
+      display: none;
+      min-height: 34px;
+      min-width: 34px;
+      border: 1px solid var(--line-blue);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .note-box,
+    .form-wrap,
+    .availability-card {
+      border: 1px solid var(--line-blue);
+      background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)),
+        linear-gradient(120deg, rgba(238, 247, 252, 0.44), rgba(234, 249, 247, 0.3));
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+    }
+
+    .note-box {
+      padding: 22px;
+    }
+
+    .form-wrap {
+      padding: 24px;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
     }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .field.full {
@@ -645,578 +667,778 @@
     }
 
     label {
-      font-size: .82rem;
-      font-weight: 700;
-      letter-spacing: .03em;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--deep-navy);
     }
 
     input,
     select,
     textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 15px;
-      color: var(--navy);
-      background: white;
-      outline: none;
+      border: 1px solid var(--line-blue);
+      background: rgba(255, 255, 255, 0.94);
+      min-height: 42px;
+      padding: 10px 12px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 4px rgba(39,120,255,.1);
+      outline: 2px solid color-mix(in srgb, var(--icy-aqua) 66%, white);
+      border-color: var(--bright-blue);
+      outline-offset: 1px;
     }
 
-    textarea {
-      min-height: 125px;
-      resize: vertical;
+    .form-help {
+      margin-top: 14px;
+      font-size: 0.89rem;
+      color: var(--text-muted);
     }
 
-    .form-note {
-      font-size: .82rem;
-      margin: 14px 0 18px;
-    }
-
-    .success {
+    .form-message {
       display: none;
-      padding: 16px;
-      border-radius: 14px;
-      background: var(--mint);
-      color: var(--navy);
-      margin-top: 16px;
-      font-weight: 700;
+      margin-top: 12px;
+      border: 1px solid var(--line-blue);
+      background: color-mix(in srgb, #ffffff 84%, var(--mist-gray));
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      color: var(--deep-navy);
     }
 
-    .closing {
-      text-align: center;
-      background: var(--blue);
-      color: white;
-      padding: 110px 0;
+    .view-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .closing p {
-      color: rgba(255,255,255,.78);
-      max-width: 600px;
-      margin: 24px auto 30px;
-    }
-
-    .closing .btn-primary {
-      background: white;
-      color: var(--blue);
-      box-shadow: none;
-    }
-
-    footer {
-      padding: 65px 0 35px;
-      background: #071a2e;
-      color: white;
-    }
-
-    .footer-grid {
+    .availability-grid {
+      margin-top: 26px;
       display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 50px;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
-    footer p,
-    footer a {
-      color: rgba(255,255,255,.62);
-      font-size: .9rem;
-    }
-
-    .footer-title {
-      color: white;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .footer-links {
+    .availability-card {
+      padding: 20px;
       display: grid;
       gap: 10px;
     }
 
-    .copyright {
-      border-top: 1px solid rgba(255,255,255,.12);
-      margin-top: 45px;
-      padding-top: 22px;
-      color: rgba(255,255,255,.45);
-      font-size: .8rem;
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .nav-links {
         position: fixed;
-        inset: 78px 0 auto 0;
-        display: none;
-        padding: 24px;
+        top: 78px;
+        left: 0;
+        right: 0;
+        background: rgba(248, 252, 253, 0.98);
+        border-bottom: 1px solid var(--line-blue);
+        padding: 16px 24px 22px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
         flex-direction: column;
-        align-items: stretch;
-        background: white;
-        border-bottom: 1px solid var(--line);
+        align-items: flex-start;
+        gap: 14px;
+        transform: translateY(-8px);
+        transition: max-height 0.26s ease, opacity 0.22s ease, transform 0.22s ease;
+        pointer-events: none;
       }
 
       .nav-links.open {
-        display: flex;
+        max-height: 380px;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
       }
 
-      .menu-btn {
-        display: block;
+      .topbar-row {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
       }
 
-      .hero-grid,
-      .intro-grid,
-      .why-grid,
-      .areas-grid,
-      .faq-grid,
-      .quote-grid {
+      .header-cta {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .split,
+      .availability-grid {
         grid-template-columns: 1fr;
-        gap: 45px;
-      }
-
-      .hero-side,
-      .why-statement {
-        position: static;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .trust-grid div {
-        border-bottom: 1px solid var(--line);
-      }
-
-      .service-row {
-        grid-template-columns: 45px 1fr auto;
-      }
-
-      .service-row p {
-        grid-column: 2 / -1;
-      }
-
-      .checklist-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .check-item {
-        border-bottom: 1px solid rgba(255,255,255,.14);
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      .site-shell::before {
+        background: none;
+      }
+
       .container {
-        width: min(100% - 24px, 1180px);
+        width: min(1160px, calc(100% - 30px));
       }
 
-      .hero {
-        min-height: auto;
-        padding-top: 125px;
+      .view {
+        padding-top: 62px;
       }
 
-      .hero h1 {
-        font-size: 4.15rem;
+      .hero-actions {
+        margin-top: 36px;
       }
 
-      section {
-        padding: 85px 0;
+      .btn {
+        min-height: 50px;
+        padding: 0 24px;
       }
 
-      .section-head {
-        display: block;
-      }
-
-      .section-head p {
-        margin-top: 20px;
-      }
-
-      .trust-grid,
-      .checklist-grid,
-      .form-grid,
-      .footer-grid {
+      .why-grid,
+      .form-grid {
         grid-template-columns: 1fr;
       }
 
-      .trust-grid div,
-      .check-item {
-        border-right: 0;
+      .steps-grid,
+      .availability-grid,
+      .split {
+        grid-template-columns: 1fr;
       }
 
-      .service-row {
-        grid-template-columns: 36px 1fr auto;
-        gap: 12px;
+      .service-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 14px;
       }
 
-      .service-row h3 {
-        font-size: 1.75rem;
+      .home-footer {
+        padding-bottom: 112px;
       }
 
-      .area-cloud {
-        min-height: 390px;
+      .footer-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
 
-      .area-tag {
-        font-size: .7rem;
-        padding: 7px 9px;
+      .footer-left,
+      .footer-right {
+        justify-items: center;
+        text-align: center;
       }
 
-      .area-list {
-        columns: 1;
+      .footer-email {
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .book-dismiss {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .quote-card {
-        padding: 22px;
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-book {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .book-btn {
+        min-height: 40px;
+        padding: 0 14px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       * {
-        scroll-behavior: auto !important;
+        animation: none !important;
         transition: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="#home" class="logo" aria-label="Scrub Club 801 home">
-        <span class="logo-mark" aria-hidden="true"></span>
-        Scrub Club 801
-      </a>
+  <div class="site-shell" id="siteShell">
+    <header class="topbar">
+      <div class="container topbar-row">
+        <a class="logo" href="#home-top" id="logoLink" aria-label="Scrub Club 801 home">
+          <span>Scrub Club 801</span>
+        </a>
 
-      <nav class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#areas">Areas</a>
-        <a href="#faq">FAQs</a>
-        <a href="#quote">Get a Quote</a>
-        <a href="#quote" class="btn btn-primary">Book Now</a>
-      </nav>
+        <nav class="nav-links" id="siteNav" aria-label="Primary navigation">
+          <a class="nav-link" href="#home-top" data-section-link="home-top">Home</a>
+          <a class="nav-link" href="#why-us" data-section-link="why-us">Why Us</a>
+          <a class="nav-link" href="#service-area" data-section-link="service-area">Service Area</a>
+          <a class="nav-link" href="#how-it-works" data-section-link="how-it-works">How It Works</a>
+          <a class="nav-link" href="#faq" data-section-link="faq">FAQ</a>
+          <a class="nav-link" href="#contact" data-section-link="contact">Contact</a>
+        </nav>
 
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-    </div>
-  </header>
+        <button class="btn btn-primary header-cta" type="button" data-open-view="quote">Request a Free Quote</button>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">Utah’s freshest cleaning club</span>
-          <h1>A cleaner home, <em>without giving up your day.</em></h1>
-          <p class="hero-copy">
-            Scrub Club 801 provides thoughtful, reliable home cleaning throughout Draper and nearby Utah communities. Created by two friends who believe a clean home should feel calm, comfortable, and completely refreshed.
-          </p>
-          <div class="hero-actions">
-            <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
-            <a href="#services" class="btn btn-secondary">Explore Our Services</a>
-          </div>
-        </div>
-
-        <aside class="hero-side">
-          <strong>Locally owned by two friends</strong>
-          <p>Personal service, clear communication, and details that make your whole home feel better.</p>
-          <div class="mini-stat"><span>Based in</span><span>Draper, UT</span></div>
-          <div class="mini-stat"><span>Service radius</span><span>About 35 min</span></div>
-          <div class="mini-stat"><span>Quotes</span><span>Personalized</span></div>
-        </aside>
+        <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+          <span class="mobile-toggle-line"></span>
+          <span class="mobile-toggle-line"></span>
+          <span class="mobile-toggle-line"></span>
+        </button>
       </div>
-    </section>
+    </header>
 
-    <div class="trust-strip">
-      <div class="container trust-grid">
-        <div>Locally owned</div>
-        <div>Detail focused</div>
-        <div>Flexible scheduling</div>
-        <div>Personalized quotes</div>
-        <div>Reliable communication</div>
-      </div>
-    </div>
-
-    <section id="about">
-      <div class="container intro-grid">
-        <div>
-          <span class="eyebrow">About Scrub Club</span>
-        </div>
-        <div class="intro-copy">
-          <h2>Cleaning your space like it’s our own.</h2>
-          <p>
-            Scrub Club 801 was created by Nella and Baylee to make local home cleaning feel more personal, organized, and dependable. We focus on what matters most to each client, from everyday upkeep to the details that are easy to miss.
-          </p>
-          <p>
-            Our approach is simple: listen carefully, communicate clearly, respect every home, and leave each space feeling lighter than we found it.
-          </p>
-          <div class="signature">Nella + Baylee</div>
-          <p>Two friends, one shared obsession with a truly clean space.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="services" id="services">
-      <div class="container">
-        <div class="section-head">
+    <main class="view-wrap" id="viewWrap">
+      <section class="view active" id="view-home" data-view="home">
+        <div class="container hero-layout" id="home-top" aria-label="Hero">
           <div>
-            <span class="eyebrow">What we clean</span>
-            <h2>Services made for real life.</h2>
+            <h1>Scrub Club 801</h1>
+            <p class="hero-slogan">Based in Draper, Utah</p>
+            <p class="hero-copy">Professional home cleaning,<br />vehicle detailing,<br />and specialty care.</p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="button" data-open-view="quote">Request a Free Quote</button>
+              <button class="btn btn-secondary" type="button" data-open-view="availability">View Availability</button>
+            </div>
           </div>
-          <p>Every home is different. We create a personalized quote based on your space, schedule, and priorities.</p>
         </div>
 
-        <div class="services-list">
-          <div class="service-row"><span class="service-number">01</span><h3>Standard Home Cleaning</h3><p>Reliable upkeep for kitchens, bathrooms, bedrooms, and living spaces.</p><span class="service-arrow">↗</span></div>
-          <div class="service-row"><span class="service-number">02</span><h3>Deep Cleaning</h3><p>Extra attention for buildup, overlooked areas, and homes that need a reset.</p><span class="service-arrow">↗</span></div>
-          <div class="service-row"><span class="service-number">03</span><h3>Move-In Cleaning</h3><p>Start fresh with a clean, comfortable space before unpacking.</p><span class="service-arrow">↗</span></div>
-          <div class="service-row"><span class="service-number">04</span><h3>Move-Out Cleaning</h3><p>Leave your previous home looking clean, polished, and ready for what is next.</p><span class="service-arrow">↗</span></div>
-          <div class="service-row"><span class="service-number">05</span><h3>Recurring Cleaning</h3><p>Weekly, biweekly, or monthly options based on availability.</p><span class="service-arrow">↗</span></div>
-          <div class="service-row"><span class="service-number">06</span><h3>Custom Requests</h3><p>Tell us what needs attention and we will build it into your quote when possible.</p><span class="service-arrow">↗</span></div>
+        <div class="container section-block" id="why-us">
+          <p class="view-title">Why Choose Scrub Club</p>
+          <h2>Why Choose Scrub Club</h2>
+          <div class="why-grid" aria-label="Why choose us">
+            <article class="why-item">
+              <h3>Locally Owned</h3>
+              <p>Based in Draper and operated by two local friends.</p>
+            </article>
+            <article class="why-item">
+              <h3>Flexible Scheduling</h3>
+              <p>Appointment options designed around your availability.</p>
+            </article>
+            <article class="why-item">
+              <h3>Reliable Communication</h3>
+              <p>Clear updates before and after every appointment.</p>
+            </article>
+            <article class="why-item">
+              <h3>Attention to Detail</h3>
+              <p>Careful, thorough service without rushing through the job.</p>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="container why-grid">
-        <div class="why-statement">
-          <span class="eyebrow">Why choose us</span>
-          <h2>More personal than a chain. More dependable than doing it yourself.</h2>
-        </div>
-        <div class="reason-list">
-          <div class="reason">
-            <div class="reason-index">01</div>
-            <div><h3>A local two-person business</h3><p>You know exactly who you are working with and who is caring for your home.</p></div>
-          </div>
-          <div class="reason">
-            <div class="reason-index">02</div>
-            <div><h3>Cleaning plans based on your needs</h3><p>We focus on the rooms, surfaces, and details that matter most to you.</p></div>
-          </div>
-          <div class="reason">
-            <div class="reason-index">03</div>
-            <div><h3>Attention to overlooked details</h3><p>Our goal is not just to tidy up, but to leave your space feeling noticeably refreshed.</p></div>
-          </div>
-          <div class="reason">
-            <div class="reason-index">04</div>
-            <div><h3>Simple communication</h3><p>Clear quotes, straightforward scheduling, and no confusing corporate process.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="container section-block" id="service-area">
+          <p class="view-title">Service Area</p>
+          <h2>Based in Draper, Utah</h2>
+          <p class="service-kicker">Serving</p>
 
-    <section class="checklist-section">
-      <div class="container">
-        <div class="section-head">
+          <div class="service-divider" aria-hidden="true"></div>
+
+          <div class="service-grid" aria-label="Service area locations">
+            <div class="service-cell">Draper</div>
+            <div class="service-cell">Riverton</div>
+            <div class="service-cell">Sandy</div>
+            <div class="service-cell">Herriman</div>
+            <div class="service-cell">South Jordan</div>
+            <div class="service-cell">Bluffdale</div>
+            <div class="service-cell">Midvale</div>
+            <div class="service-cell">Cottonwood Heights</div>
+          </div>
+
+          <p class="service-nearby">Nearby areas by request</p>
+        </div>
+
+        <div class="container section-block" id="how-it-works">
+          <h2>How It Works</h2>
+          <div class="steps-grid" aria-label="How it works steps">
+            <article class="step-item">
+              <p class="step-number">01</p>
+              <p>Request a quote</p>
+            </article>
+            <article class="step-item">
+              <p class="step-number">02</p>
+              <p>Choose your date</p>
+            </article>
+            <article class="step-item">
+              <p class="step-number">03</p>
+              <p>We confirm details</p>
+            </article>
+            <article class="step-item">
+              <p class="step-number">04</p>
+              <p>Enjoy your refreshed space</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="container section-block" id="faq">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">Do you bring your own cleaning supplies?</button></h3>
+              <div class="faq-panel" id="faq-a-1" role="region" aria-labelledby="faq-q-1" hidden>
+                <p>Yes. We bring the supplies and equipment needed for the job, so you do not need to provide anything. If you have specific products you want us to use, we are happy to accommodate when we can.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">Do I need to be home during the appointment?</button></h3>
+              <div class="faq-panel" id="faq-a-2" role="region" aria-labelledby="faq-q-2" hidden>
+                <p>Not necessarily. Many clients are away while we clean, but you are welcome to be home if that feels better for you. We can talk through access and timing when we schedule your appointment.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">How long does a cleaning usually take?</button></h3>
+              <div class="faq-panel" id="faq-a-3" role="region" aria-labelledby="faq-q-3" hidden>
+                <p>Every home and service is different, so timing depends on the size of the space and the type of cleaning requested. Before your appointment, we will give you a clear estimate so you know what to expect.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">What areas do you serve?</button></h3>
+              <div class="faq-panel" id="faq-a-4" role="region" aria-labelledby="faq-q-4" hidden>
+                <p>We are based in Draper, Utah and serve Draper along with nearby communities, including Sandy, South Jordan, Riverton, Herriman, Bluffdale, Midvale, and Cottonwood Heights. If you are nearby and do not see your city listed, reach out and we can let you know if we can accommodate your location.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">Can I request recurring cleaning?</button></h3>
+              <div class="faq-panel" id="faq-a-5" role="region" aria-labelledby="faq-q-5" hidden>
+                <p>Absolutely. We offer recurring schedules for clients who want to keep their home consistently clean. Whether you need weekly, biweekly, or monthly service, we can help build a schedule that fits your routine.</p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <h3><button class="faq-trigger" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">How do I request a quote?</button></h3>
+              <div class="faq-panel" id="faq-a-6" role="region" aria-labelledby="faq-q-6" hidden>
+                <p>Click the Request a Free Quote button and share a few details about the service you need. We will review your request and follow up as soon as possible with next steps and any additional information we need.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container section-block home-footer" id="contact">
+          <div class="footer-main">
+            <div class="footer-left">
+              <h2 class="footer-brand">Scrub Club 801</h2>
+              <p class="footer-description">Professional home cleaning, vehicle detailing, and specialty care based in Draper, Utah.</p>
+              <div class="footer-meta">
+                <p>Based in Draper, Utah</p>
+                <p><a class="footer-email" href="mailto:scrubclub801@gmail.com">scrubclub801@gmail.com</a></p>
+              </div>
+            </div>
+
+            <div class="footer-right">
+              <h3 class="footer-social-heading">Follow Us</h3>
+              <div class="footer-social-row" aria-label="Social links">
+                <!-- Replace this URL with the real Instagram profile URL -->
+                <a class="footer-social-link" href="https://www.instagram.com/scrubclub801" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2zm10 1.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+                  </svg>
+                </a>
+
+                <!-- Replace this URL with the real TikTok profile URL -->
+                <a class="footer-social-link" href="https://www.tiktok.com/@scrubclub801" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M14.7 3c.2 1.7 1.4 3.2 3 3.9.8.3 1.6.5 2.3.5v3.2c-1.2 0-2.4-.3-3.5-.8v5.5c0 3.2-2.6 5.7-5.8 5.7S5 18.5 5 15.3s2.6-5.7 5.7-5.7c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 0 0-3.4 2.5 2.5 2.5 0 1 0 5-.1V3h1.5z" />
+                  </svg>
+                </a>
+
+                <!-- Replace this URL with the real Facebook profile URL -->
+                <a class="footer-social-link" href="https://www.facebook.com/scrubclub801" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M13.5 8.5V6.7c0-.8.5-1 1-1h1.4V3h-2.1c-2.6 0-4.3 1.6-4.3 4.2v1.3H7v2.8h2.5V21h4V11.3h2.3l.3-2.8h-2.6z" />
+                  </svg>
+                </a>
+              </div>
+              <p class="footer-handle">@ScrubClub801</p>
+              <button class="btn btn-primary footer-quote-btn" type="button" data-open-view="quote">Request a Free Quote</button>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>© 2026 Scrub Club 801</p>
+            <p>Locally owned and operated in Draper, Utah.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-quote" data-view="quote">
+        <div class="container split">
           <div>
-            <span class="eyebrow" style="color: var(--aqua)">A cleaner look at the details</span>
-            <h2>Room by room.</h2>
+            <p class="view-title">Free Quote</p>
+            <h2>Request a quote for your home or vehicle.</h2>
+            <p style="margin-top: 14px; max-width: 580px;">
+              Share the basics and preferred timing. We will follow up to confirm details and next steps.
+            </p>
+            <div class="note-box" style="margin-top: 20px;">
+              <p>
+                Contact email: <a href="mailto:scrubclub801@gmail.com" style="color: var(--bright-blue); text-decoration: underline; text-underline-offset: 3px;">scrubclub801@gmail.com</a>
+              </p>
+            </div>
+            <div class="view-actions">
+              <button class="btn btn-secondary" type="button" data-open-view="home">Back to Home</button>
+            </div>
           </div>
-          <p>Your final checklist depends on the service selected and your personalized quote.</p>
-        </div>
 
-        <div class="checklist-grid">
-          <div class="check-item"><span>✦</span><h3>Kitchen</h3><ul><li>Counters</li><li>Sink area</li><li>Appliance exteriors</li><li>Floors</li></ul></div>
-          <div class="check-item"><span>✦</span><h3>Bathrooms</h3><ul><li>Mirrors</li><li>Vanity</li><li>Shower or tub</li><li>Fixtures</li></ul></div>
-          <div class="check-item"><span>✦</span><h3>Bedrooms</h3><ul><li>Surface dusting</li><li>Vacuuming</li><li>Floor care</li><li>General reset</li></ul></div>
-          <div class="check-item"><span>✦</span><h3>Living Spaces</h3><ul><li>Common surfaces</li><li>Furniture areas</li><li>Floors</li><li>Finishing touches</li></ul></div>
-          <div class="check-item"><span>✦</span><h3>Custom Details</h3><ul><li>Special requests</li><li>Priority rooms</li><li>Pet considerations</li><li>Extra attention</li></ul></div>
-        </div>
-      </div>
-    </section>
+          <form class="form-wrap" id="quoteForm" novalidate>
+            <!-- To connect Formspree, add action="https://formspree.io/f/your-form-id" and method="POST" here. -->
+            <!-- To connect another form service, replace this local handler with your API submit request. -->
+            <div class="form-grid">
+              <div class="field">
+                <label for="quoteName">Name</label>
+                <input id="quoteName" name="name" type="text" required />
+              </div>
+              <div class="field">
+                <label for="quotePhone">Phone</label>
+                <input id="quotePhone" name="phone" type="tel" required />
+              </div>
+              <div class="field">
+                <label for="quoteEmail">Email</label>
+                <input id="quoteEmail" name="email" type="email" required />
+              </div>
+              <div class="field">
+                <label for="quoteCity">City</label>
+                <input id="quoteCity" name="city" type="text" required />
+              </div>
+              <div class="field">
+                <label for="quoteCleaningType">Cleaning Type</label>
+                <select id="quoteCleaningType" name="cleaningType" required>
+                  <option value="">Select type</option>
+                  <option>Standard Cleaning</option>
+                  <option>Deep Cleaning</option>
+                  <option>Move-In or Move-Out</option>
+                  <option>Specialty Care</option>
+                  <option>Detailing</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="quoteScope">Home or Vehicle</label>
+                <select id="quoteScope" name="scope" required>
+                  <option value="">Select</option>
+                  <option>Home</option>
+                  <option>Vehicle</option>
+                  <option>Both</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="quoteDate">Preferred Date</label>
+                <input id="quoteDate" name="preferredDate" type="date" required />
+              </div>
+              <div class="field full">
+                <label for="quoteMessage">Message</label>
+                <textarea id="quoteMessage" name="message" required></textarea>
+              </div>
+            </div>
 
-    <section id="areas">
-      <div class="container areas-grid">
-        <div class="area-cloud" aria-label="Service area graphic">
-          <div class="area-core">Draper<br>Utah</div>
-          <span class="area-tag">Sandy</span>
-          <span class="area-tag">South Jordan</span>
-          <span class="area-tag">Lehi</span>
-          <span class="area-tag">Riverton</span>
-          <span class="area-tag">Bluffdale</span>
-          <span class="area-tag">Herriman</span>
-          <span class="area-tag">Midvale</span>
-          <span class="area-tag">Highland</span>
+            <p class="form-help">This form is currently a front-end draft. Submission setup is still required before requests can be sent.</p>
+            <button class="btn btn-primary" type="submit">Submit Request</button>
+            <p class="form-message" id="quoteFormMessage" role="status" aria-live="polite">
+              Form submission is not connected yet. Please connect Formspree or another service before using this form live.
+            </p>
+          </form>
         </div>
+      </section>
 
-        <div>
-          <span class="eyebrow">Where we go</span>
-          <h2>Proudly cleaning around Draper.</h2>
-          <p style="margin-top: 24px">
-            We serve homes within approximately a 35-minute driving radius of Draper. Farther appointments may depend on traffic, scheduling, and availability.
+      <section class="view" id="view-availability" data-view="availability">
+        <div class="container">
+          <p class="view-title">Availability</p>
+          <h2>Request your preferred date and time.</h2>
+          <p style="margin-top: 14px; max-width: 640px;">
+            We can confirm appointments after reviewing your request. This page does not show live calendar slots.
           </p>
-          <ul class="area-list">
-            <li>Draper</li><li>Sandy</li><li>South Jordan</li><li>Riverton</li>
-            <li>Bluffdale</li><li>Midvale</li><li>Cottonwood Heights</li>
-            <li>West Jordan</li><li>Herriman</li><li>Lehi</li>
-            <li>Highland</li><li>American Fork</li><li>Murray</li><li>Holladay</li>
-          </ul>
-          <p><strong>Not sure if you are inside our service area?</strong> Send us your ZIP code and we will confirm availability.</p>
-        </div>
-      </div>
-    </section>
 
-    <section class="faq" id="faq">
-      <div class="container faq-grid">
-        <div>
-          <span class="eyebrow">Frequently asked</span>
-          <h2>Questions, answered.</h2>
-        </div>
-
-        <div class="accordion">
-          <div class="faq-item open">
-            <button class="faq-question">What areas do you serve?<span>+</span></button>
-            <div class="faq-answer"><p>We primarily serve Draper and nearby communities within roughly a 35-minute drive. Send us your ZIP code to confirm.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">How much does a cleaning cost?<span>+</span></button>
-            <div class="faq-answer"><p>Pricing depends on the size and condition of your home, the service requested, and any special priorities. We provide personalized quotes.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Do you provide cleaning supplies?<span>+</span></button>
-            <div class="faq-answer"><p>This policy is still being finalized. Please ask when requesting your quote so we can confirm what will be provided.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Do I need to be home?<span>+</span></button>
-            <div class="faq-answer"><p>Not necessarily. Access arrangements can be discussed when your booking is confirmed.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Do you offer recurring cleaning?<span>+</span></button>
-            <div class="faq-answer"><p>Yes, depending on current availability. Weekly, biweekly, and monthly options may be available.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Do you clean homes with pets?<span>+</span></button>
-            <div class="faq-answer"><p>Yes. Let us know about your pets when requesting a quote so we can plan accordingly.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">How do I receive my quote?<span>+</span></button>
-            <div class="faq-answer"><p>Submit the form below with details about your home. We will contact you to discuss your needs, availability, and pricing.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote-section" id="quote">
-      <div class="container quote-grid">
-        <div>
-          <span class="eyebrow">Free personalized quote</span>
-          <h2>Tell us about your space.</h2>
-          <p style="margin-top: 24px">Share a few details and we will follow up to discuss availability, priorities, and your custom quote.</p>
-        </div>
-
-        <form class="quote-card" id="quoteForm">
-          <div class="form-grid">
-            <div class="field"><label for="name">Full name</label><input id="name" required></div>
-            <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" required></div>
-            <div class="field"><label for="email">Email address</label><input id="email" type="email" required></div>
-            <div class="field"><label for="city">City</label><input id="city" required></div>
-            <div class="field"><label for="zip">ZIP code</label><input id="zip" required></div>
-            <div class="field">
-              <label for="property">Property type</label>
-              <select id="property" required>
-                <option value="">Choose one</option>
-                <option>House</option><option>Apartment</option><option>Townhome</option><option>Condo</option><option>Other</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="service">Service requested</label>
-              <select id="service" required>
-                <option value="">Choose one</option>
-                <option>Standard Cleaning</option><option>Deep Cleaning</option><option>Move-In Cleaning</option><option>Move-Out Cleaning</option><option>Recurring Cleaning</option><option>Custom Request</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="frequency">Frequency</label>
-              <select id="frequency">
-                <option>One-time</option><option>Weekly</option><option>Biweekly</option><option>Monthly</option>
-              </select>
-            </div>
-            <div class="field"><label for="bedrooms">Bedrooms</label><input id="bedrooms" type="number" min="0"></div>
-            <div class="field"><label for="bathrooms">Bathrooms</label><input id="bathrooms" type="number" min="0" step=".5"></div>
-            <div class="field full"><label for="notes">Tell us about your home and priorities</label><textarea id="notes" placeholder="Square footage, current condition, pets, preferred date, special requests, or anything else we should know."></textarea></div>
+          <div class="availability-grid">
+            <article class="availability-card">
+              <h3 style="font-size: 1.2rem;">How to request</h3>
+              <p>Choose your preferred date, provide basic details, and we will confirm by email.</p>
+              <button class="btn btn-secondary" type="button" data-open-view="quote">Open Quote Request</button>
+            </article>
+            <article class="availability-card">
+              <h3 style="font-size: 1.2rem;">Need direct help?</h3>
+              <p>Contact Scrub Club 801 to discuss timing, service scope, and next steps.</p>
+              <a class="btn btn-primary" href="mailto:scrubclub801@gmail.com">Contact Scrub Club 801</a>
+            </article>
           </div>
 
-          <p class="form-note">This demo form validates on the front end but does not send an email until you connect a form service.</p>
-          <button class="btn btn-primary" type="submit">Request My Free Quote</button>
-          <div class="success" id="successMessage">Thank you! We received your request and will contact you to discuss availability and your personalized quote.</div>
-        </form>
-      </div>
-    </section>
-
-    <section class="closing">
-      <div class="container">
-        <span class="eyebrow" style="color: var(--aqua)">Your clean-home era starts here</span>
-        <h2>Ready to come home to clean?</h2>
-        <p>Tell us about your space and we will create a cleaning plan that fits your home, schedule, and priorities.</p>
-        <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="logo"><span class="logo-mark"></span>Scrub Club 801</div>
-          <p style="margin-top: 18px">Locally owned by Nella + Baylee.</p>
-        </div>
-        <div>
-          <div class="footer-title">Explore</div>
-          <div class="footer-links">
-            <a href="#about">About</a><a href="#services">Services</a><a href="#areas">Service Areas</a><a href="#faq">FAQs</a>
+          <div class="view-actions">
+            <button class="btn btn-secondary" type="button" data-open-view="home">Back to Home</button>
           </div>
         </div>
-        <div>
-          <div class="footer-title">Contact</div>
-          <div class="footer-links">
-            <a href="mailto:hello@scrubclub801.us">hello@scrubclub801.us</a>
-            <a href="tel:+18015550101">(801) 555-0101</a>
-            <a href="#">Instagram</a>
-            <a href="#">TikTok</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-title">Legal</div>
-          <div class="footer-links">
-            <a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#quote">Request a Quote</a>
-          </div>
-        </div>
-      </div>
+      </section>
+    </main>
 
-      <div class="copyright">© 2026 Scrub Club 801. All rights reserved.</div>
+    <div class="sticky-book" id="stickyBook">
+      <button class="book-btn" type="button" data-open-view="quote">Book Now</button>
+      <button class="book-dismiss" id="bookDismiss" type="button" aria-label="Dismiss book button">×</button>
     </div>
-  </footer>
+  </div>
 
   <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
+    const views = {
+      home: { id: "view-home", title: "Scrub Club 801 | Home" },
+      quote: { id: "view-quote", title: "Scrub Club 801 | Free Quote" },
+      availability: { id: "view-availability", title: "Scrub Club 801 | Availability" }
+    };
 
-    menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
+    const nav = document.getElementById("siteNav");
+    const topbar = document.querySelector(".topbar");
+    const logoLink = document.getElementById("logoLink");
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const sectionLinks = Array.from(document.querySelectorAll("[data-section-link]"));
+    const viewNodes = Array.from(document.querySelectorAll(".view"));
+    const mobileToggle = document.getElementById("mobileToggle");
+    const viewTriggers = Array.from(document.querySelectorAll("[data-open-view]"));
+    const faqTriggers = Array.from(document.querySelectorAll(".faq-trigger"));
+    const stickyBook = document.getElementById("stickyBook");
+    const bookDismiss = document.getElementById("bookDismiss");
+    const sectionIds = ["home-top", "why-us", "service-area", "how-it-works", "faq", "contact"];
+
+    function normalizeView(value) {
+      return Object.prototype.hasOwnProperty.call(views, value) ? value : "home";
+    }
+
+    function parseHashState() {
+      const raw = window.location.hash.replace("#", "").trim();
+      if (!raw) {
+        return { view: "home", section: "home-top" };
+      }
+
+      if (Object.prototype.hasOwnProperty.call(views, raw)) {
+        return { view: normalizeView(raw), section: null };
+      }
+
+      if (document.getElementById(raw)) {
+        return { view: "home", section: raw };
+      }
+
+      return { view: "home", section: "home-top" };
+    }
+
+    function closeNav() {
+      nav.classList.remove("open");
+      mobileToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function setActiveNav(sectionId) {
+      navLinks.forEach((link) => {
+        const isActive = link.dataset.sectionLink === sectionId;
+        link.classList.toggle("active", isActive);
+        link.setAttribute("aria-current", isActive ? "page" : "false");
+      });
+    }
+
+    function renderView(view, options = {}) {
+      const { scrollTop = true } = options;
+      const resolvedView = normalizeView(view);
+
+      viewNodes.forEach((section) => {
+        section.classList.toggle("active", section.dataset.view === resolvedView);
+      });
+
+      if (resolvedView !== "home") {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          link.setAttribute("aria-current", "false");
+        });
+      }
+
+      document.title = views[resolvedView].title;
+      if (scrollTop) {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      closeNav();
+    }
+
+    function openView(view, pushState = true) {
+      const resolvedView = normalizeView(view);
+      renderView(resolvedView, { scrollTop: true });
+
+      if (pushState) {
+        history.pushState({ view: resolvedView }, "", `#${resolvedView}`);
+      }
+    }
+
+    function openSection(sectionId, pushState = true) {
+      renderView("home", { scrollTop: false });
+      const target = document.getElementById(sectionId);
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      setActiveNav(sectionId);
+
+      if (pushState) {
+        history.pushState({ view: "home", section: sectionId }, "", `#${sectionId}`);
+      }
+
+      closeNav();
+    }
+
+    logoLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      openSection("home-top", true);
     });
 
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => navLinks.classList.remove("open"));
-    });
-
-    document.querySelectorAll(".faq-question").forEach(button => {
-      button.addEventListener("click", () => {
-        const item = button.parentElement;
-        item.classList.toggle("open");
-        button.querySelector("span").textContent = item.classList.contains("open") ? "−" : "+";
+    sectionLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const targetId = link.dataset.sectionLink;
+        if (!targetId) {
+          return;
+        }
+        openSection(targetId, true);
       });
     });
 
-    document.getElementById("quoteForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+    });
 
-      if (!this.checkValidity()) {
-        this.reportValidity();
+    document.addEventListener("click", (event) => {
+      const clickedInsideNav = nav.contains(event.target) || mobileToggle.contains(event.target);
+      if (!clickedInsideNav) {
+        closeNav();
+      }
+    });
+
+    viewTriggers.forEach((node) => {
+      node.addEventListener("click", (event) => {
+        const targetView = node.dataset.openView;
+        if (!targetView) {
+          return;
+        }
+
+        event.preventDefault();
+        openView(targetView, true);
+      });
+    });
+
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const panelId = trigger.getAttribute("aria-controls");
+        const panel = panelId ? document.getElementById(panelId) : null;
+        const willOpen = trigger.getAttribute("aria-expanded") !== "true";
+
+        faqTriggers.forEach((item) => {
+          item.setAttribute("aria-expanded", "false");
+          const currentId = item.getAttribute("aria-controls");
+          const currentPanel = currentId ? document.getElementById(currentId) : null;
+          if (currentPanel) {
+            currentPanel.hidden = true;
+          }
+        });
+
+        if (panel && willOpen) {
+          trigger.setAttribute("aria-expanded", "true");
+          panel.hidden = false;
+        }
+      });
+    });
+
+    if (bookDismiss) {
+      const key = "scrubclub801-book-dismissed";
+      if (window.sessionStorage.getItem(key) === "1") {
+        stickyBook.classList.add("hidden");
+      }
+
+      bookDismiss.addEventListener("click", () => {
+        stickyBook.classList.add("hidden");
+        window.sessionStorage.setItem(key, "1");
+      });
+    }
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const homeVisible = document.getElementById("view-home").classList.contains("active");
+      if (!homeVisible) {
         return;
       }
 
-      document.getElementById("successMessage").style.display = "block";
-      this.reset();
+      const visibleEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visibleEntry || !visibleEntry.target.id) {
+        return;
+      }
+
+      setActiveNav(visibleEntry.target.id);
+    }, { threshold: [0.45, 0.65], rootMargin: "-20% 0px -55% 0px" });
+
+    sectionIds.forEach((id) => {
+      const node = document.getElementById(id);
+      if (node) {
+        sectionObserver.observe(node);
+      }
+    });
+
+    window.addEventListener("popstate", (event) => {
+      if (event.state && event.state.view && event.state.view !== "home") {
+        renderView(normalizeView(event.state.view), { scrollTop: true });
+        return;
+      }
+
+      const parsed = parseHashState();
+      renderView(parsed.view, { scrollTop: false });
+      if (parsed.view === "home") {
+        const target = parsed.section || "home-top";
+        const sectionNode = document.getElementById(target);
+        if (sectionNode) {
+          sectionNode.scrollIntoView({ behavior: "instant", block: "start" });
+          setActiveNav(target);
+        }
+      }
+    });
+
+    const initialState = parseHashState();
+    renderView(initialState.view, { scrollTop: false });
+
+    if (initialState.view === "home") {
+      const initialSection = initialState.section || "home-top";
+      const initialTarget = document.getElementById(initialSection);
+      if (initialTarget) {
+        initialTarget.scrollIntoView({ behavior: "instant", block: "start" });
+      }
+      setActiveNav(initialSection);
+      history.replaceState({ view: "home", section: initialSection }, "", `#${initialSection}`);
+    } else {
+      history.replaceState({ view: initialState.view }, "", `#${initialState.view}`);
+    }
+
+    function syncTopbarState() {
+      topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+    }
+
+    syncTopbarState();
+    window.addEventListener("scroll", syncTopbarState, { passive: true });
+
+    const quoteForm = document.getElementById("quoteForm");
+    const quoteFormMessage = document.getElementById("quoteFormMessage");
+
+    quoteForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!quoteForm.checkValidity()) {
+        quoteForm.reportValidity();
+        return;
+      }
+
+      quoteFormMessage.style.display = "block";
     });
   </script>
 </body>
