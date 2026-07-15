@@ -1,6 +1,5 @@
 (function () {
   const auth = window.StaffAuth.createAuthClient();
-  const OWNER_ADMIN_EMAIL = "nellamaglic@gmail.com";
   const NO_SECURE_EMAIL_MESSAGE = "Secure email login has not been connected yet. Use Staff Access for local testing or complete the Supabase setup.";
 
   function smoothFocus(node) {
@@ -32,10 +31,10 @@
   }
 
   function welcomeRoleLabel(role) {
-    if (role === "owner" || role === "admin") {
-      return "Owner / Admin";
-    }
     if (role === "manager") {
+      return "Manager";
+    }
+    if (role === "owner" || role === "admin") {
       return "Manager";
     }
     if (role === "team_lead") {
@@ -193,21 +192,10 @@
           return;
         }
 
-        if (email === OWNER_ADMIN_EMAIL && !window.StaffAuth.canAccessRole(profile.role, "admin")) {
-          message("This account does not have Owner / Admin permissions in the staff profile.", true);
-          return;
-        }
-
         await auth.signIn(email, password, remember);
         const session = await auth.getSession();
         if (!session) {
           message("Sign in failed.", true);
-          return;
-        }
-
-        if (email === OWNER_ADMIN_EMAIL && !window.StaffAuth.canAccessRole(session.role, "admin")) {
-          await auth.signOut();
-          message("This account does not have Owner / Admin access in authentication metadata.", true);
           return;
         }
 

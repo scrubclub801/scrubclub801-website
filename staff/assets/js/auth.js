@@ -7,7 +7,7 @@
       id: "nella_maglic",
       name: "Nella Maglic",
       email: "nellamaglic@gmail.com",
-      role: "admin",
+      role: "manager",
       pin: "2008",
     },
     baylee_ellis: {
