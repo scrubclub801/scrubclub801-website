@@ -93,7 +93,45 @@
   <script src="/staff/assets/js/auth.js"></script>
   <script src="/staff/assets/js/login.js"></script>
   <script>
-    window.StaffLogin.init();
+    if (window.StaffLogin && typeof window.StaffLogin.init === "function") {
+      window.StaffLogin.init();
+    }
+
+    // Fallback modal wiring so Staff Access can still open if the main init path fails.
+    (function () {
+      const openButton = document.querySelector("[data-open-admin-modal]");
+      const modal = document.querySelector("[data-admin-modal]");
+      const closeButtons = document.querySelectorAll("[data-close-admin-modal]");
+      const pinInput = document.getElementById("staffAccessPin");
+
+      if (!openButton || !modal || openButton.dataset.fallbackBound === "true") {
+        return;
+      }
+
+      openButton.dataset.fallbackBound = "true";
+
+      const openModal = () => {
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        if (pinInput) {
+          window.requestAnimationFrame(() => pinInput.focus());
+        }
+      };
+
+      const closeModal = () => {
+        modal.hidden = true;
+        document.body.style.overflow = "";
+      };
+
+      openButton.addEventListener("click", openModal);
+      closeButtons.forEach((button) => button.addEventListener("click", closeModal));
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !modal.hidden) {
+          closeModal();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
