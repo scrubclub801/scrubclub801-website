@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Settings</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="manager">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Settings</h1>
+            <p class="staff-subtitle">Manager controls for account policy, notifications, automation windows, and operational preferences.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button">Save Changes</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="dashboard">Cancel</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Policy Alerts</p>
+            <p class="staff-kpi-value">2</p>
+            <p class="staff-kpi-trend">Password update cycle due in 6 days</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Integrations Online</p>
+            <p class="staff-kpi-value">5</p>
+            <p class="staff-kpi-trend up">All core services operational</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Automation Rules</p>
+            <p class="staff-kpi-value">14</p>
+            <p class="staff-kpi-trend">3 rules executed in the last hour</p>
+          </article>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Security and Access</h2>
+            </div>
+            <ul class="staff-metric-list">
+              <li><span>Session Timeout</span><strong>45 minutes</strong></li>
+              <li><span>Multi-Factor Requirement</span><strong>Managers only</strong></li>
+              <li><span>Password Rotation</span><strong>Every 90 days</strong></li>
+              <li><span>Failed Login Lockout</span><strong>5 attempts</strong></li>
+            </ul>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Communication Defaults</h2>
+            </div>
+            <ul class="staff-metric-list">
+              <li><span>Appointment Reminders</span><strong>24h + 2h before visit</strong></li>
+              <li><span>Quote Follow-Up Cadence</span><strong>2, 24, 72 hours</strong></li>
+              <li><span>Review Request Trigger</span><strong>2 hours after completion</strong></li>
+              <li><span>Escalation Notifications</span><strong>Managers + Office</strong></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="staff-grid staff-grid-3x">
+          <article class="staff-card">
+            <h3>Dispatch Window</h3>
+            <p>Operational dispatch opens at 7:00 AM and closes at 7:30 PM with evening commercial exceptions.</p>
+          </article>
+          <article class="staff-card">
+            <h3>Inventory Threshold Rule</h3>
+            <p>Auto-restock alerts trigger when supply level drops below 20% of rolling 14-day usage.</p>
+          </article>
+          <article class="staff-card">
+            <h3>Quality Control Workflow</h3>
+            <p>Jobs with satisfaction under 4.6 are auto-routed to manager review within 30 minutes.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>

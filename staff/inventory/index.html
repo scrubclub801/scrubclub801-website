@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Inventory</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="employee">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Inventory</h1>
+            <p class="staff-subtitle">Supply monitoring for field kits, warehouse stock, and vendor restock timing.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button">Create Purchase Order</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="appointments">View Tomorrow Routes</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Low Stock Items</p>
+            <p class="staff-kpi-value">3</p>
+            <p class="staff-kpi-trend">Restock recommended before 7:00 AM dispatch</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Healthy SKUs</p>
+            <p class="staff-kpi-value">24</p>
+            <p class="staff-kpi-trend up">No shortages expected this week</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Incoming Deliveries</p>
+            <p class="staff-kpi-value">2</p>
+            <p class="staff-kpi-trend">Window: Today 1:00 PM to 3:00 PM</p>
+          </article>
+        </div>
+
+        <div class="staff-table-wrap">
+          <table class="staff-table" aria-label="Inventory status table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>On Hand</th>
+                <th>Par Level</th>
+                <th>Status</th>
+                <th>Last Restock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Eco All-Purpose Cleaner 32oz</td>
+                <td>Chemical</td>
+                <td>18</td>
+                <td>30</td>
+                <td><span class="badge warning">Low</span></td>
+                <td>Jul 08</td>
+              </tr>
+              <tr>
+                <td>Microfiber Cloth Pack (24)</td>
+                <td>Consumable</td>
+                <td>41</td>
+                <td>28</td>
+                <td><span class="badge success">Healthy</span></td>
+                <td>Jul 12</td>
+              </tr>
+              <tr>
+                <td>Glass Cleaner Concentrate</td>
+                <td>Chemical</td>
+                <td>9</td>
+                <td>14</td>
+                <td><span class="badge warning">Low</span></td>
+                <td>Jul 05</td>
+              </tr>
+              <tr>
+                <td>HEPA Vacuum Bags</td>
+                <td>Equipment</td>
+                <td>33</td>
+                <td>20</td>
+                <td><span class="badge success">Healthy</span></td>
+                <td>Jul 11</td>
+              </tr>
+              <tr>
+                <td>Floor Neutralizer</td>
+                <td>Chemical</td>
+                <td>6</td>
+                <td>12</td>
+                <td><span class="badge danger">Critical</span></td>
+                <td>Jul 03</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Vendor Notes</h2>
+            </div>
+            <ul class="staff-notification-list">
+              <li><span class="dot"></span>Mountain Supply confirmed cleaner shipment for today.</li>
+              <li><span class="dot urgent"></span>Floor neutralizer replacement delayed by one day.</li>
+              <li><span class="dot"></span>Bulk towel order pricing update available for approval.</li>
+            </ul>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Warehouse Activity</h2>
+            </div>
+            <ul class="staff-activity-list">
+              <li><strong>8:20 AM</strong> Baylee checked out 6 microfiber packs for Team A.</li>
+              <li><strong>9:05 AM</strong> Carlos logged return of 2 backup vacuums.</li>
+              <li><strong>10:40 AM</strong> Nella approved restock batch INV-2294.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>

@@ -34,6 +34,11 @@
       --text-muted: #4b6178;
       --serif: "Fraunces", "Times New Roman", serif;
       --sans: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+      --brand-teal: #49d7cf;
+      --brand-aqua: #79e7f4;
+      --brand-lavender: #a88bff;
+      --brand-gradient: linear-gradient(90deg, rgba(73, 215, 207, 0.6), rgba(121, 231, 244, 0.58), rgba(168, 139, 255, 0.52));
+      --read-progress: 0;
     }
 
     * {
@@ -84,15 +89,89 @@
       isolation: isolate;
     }
 
+    .edge-droplet-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .edge-droplet {
+      position: absolute;
+      top: -26px;
+      width: 12px;
+      height: 18px;
+      border-radius: 58% 42% 58% 42%;
+      transform: rotate(17deg);
+      background: rgba(121, 231, 244, 0.18);
+      border: 1px solid rgba(121, 231, 244, 0.24);
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: edgeDropletFall var(--drop-duration, 9200ms) linear forwards;
+    }
+
+    .edge-droplet::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 3px;
+      width: 3px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.42);
+      transform: rotate(-12deg);
+    }
+
+    .edge-droplet.left {
+      left: 8px;
+    }
+
+    .edge-droplet.right {
+      right: 8px;
+    }
+
+    @keyframes edgeDropletFall {
+      0% {
+        transform: translateY(-26px) rotate(17deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.22;
+      }
+
+      70% {
+        opacity: 0.16;
+      }
+
+      100% {
+        transform: translateY(calc(100vh + 32px)) rotate(21deg);
+        opacity: 0;
+      }
+    }
+
     .site-shell::before {
       content: "";
       position: fixed;
       inset: 0;
       z-index: -1;
       background:
-        repeating-linear-gradient(0deg, rgba(24, 48, 74, 0.012) 0, rgba(24, 48, 74, 0.012) 1px, transparent 1px, transparent 56px),
-        repeating-linear-gradient(90deg, rgba(24, 48, 74, 0.008) 0, rgba(24, 48, 74, 0.008) 1px, transparent 1px, transparent 72px);
-      opacity: 0.18;
+        radial-gradient(circle at 0 0, rgba(36, 80, 126, 0.018) 0, rgba(36, 80, 126, 0.018) 1px, transparent 1px),
+        radial-gradient(circle at 34px 34px, rgba(36, 80, 126, 0.014) 0, rgba(36, 80, 126, 0.014) 1px, transparent 1px);
+      background-size: 68px 68px;
+      opacity: 0.76;
+      pointer-events: none;
+    }
+
+    .site-shell::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(34% 24% at 82% 18%, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 72%),
+        radial-gradient(28% 20% at 16% 74%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 74%);
       pointer-events: none;
     }
 
@@ -103,12 +182,38 @@
       border-bottom: 1px solid var(--line-blue);
       background: rgba(248, 252, 253, 0.9);
       backdrop-filter: blur(8px);
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+      transition: background-color 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+      box-shadow: 0 0 0 rgba(35, 53, 77, 0);
     }
 
     .topbar.is-scrolled {
-      background: rgba(252, 253, 252, 0.9);
-      backdrop-filter: blur(14px);
+      background: rgba(251, 254, 255, 0.78);
+      backdrop-filter: blur(18px) saturate(130%);
+      border-bottom-color: color-mix(in srgb, var(--line-blue) 78%, #ffffff);
+      box-shadow: 0 10px 28px rgba(35, 53, 77, 0.045);
+    }
+
+    .topbar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0));
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      transform-origin: left center;
+      transform: scaleX(var(--read-progress));
+      background: var(--brand-gradient);
+      transition: transform 0.18s linear;
+      pointer-events: none;
     }
 
     .topbar-row {
@@ -142,17 +247,36 @@
     }
 
     .nav-link {
+      position: relative;
       border-bottom: 1px solid transparent;
       padding: 8px 0;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      transition: color 0.24s ease;
       color: var(--deep-navy);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--brand-gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.24s ease;
     }
 
     .nav-link:hover,
     .nav-link:focus-visible,
     .nav-link.active {
       color: var(--bright-blue);
-      border-bottom-color: var(--bright-blue);
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
     }
 
     .header-cta {
@@ -203,6 +327,75 @@
       background: transparent;
     }
 
+    body.booking-modal-open {
+      position: fixed;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    body.booking-modal-open .site-shell {
+      filter: blur(4px);
+    }
+
+    .booking-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      align-items: stretch;
+      justify-items: stretch;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .booking-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .booking-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(35, 53, 77, 0.24);
+    }
+
+    .booking-modal-panel {
+      position: relative;
+      width: min(1200px, calc(100% - 32px));
+      margin: 16px auto;
+      border: 1px solid var(--line-blue);
+      border-radius: 18px;
+      background: #ffffff;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      max-height: calc(100vh - 32px);
+    }
+
+    .booking-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line-blue);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--deep-navy);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .booking-modal-calendar {
+      width: 100%;
+      min-height: 660px;
+      height: calc(100vh - 32px);
+      max-height: calc(100vh - 32px);
+    }
+
     .view {
       display: none;
       min-height: calc(100vh - 75px);
@@ -212,15 +405,6 @@
 
     .view.active {
       display: block;
-    }
-
-    .view-title {
-      font-size: 0.74rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--bright-blue);
-      font-weight: 500;
-      margin-bottom: 16px;
     }
 
     h1,
@@ -260,7 +444,7 @@
       grid-template-columns: minmax(0, 1fr);
       gap: 0;
       max-width: 760px;
-      padding: clamp(8px, 2vw, 22px) 0 clamp(52px, 7vw, 94px);
+      padding: clamp(4px, 1.6vw, 16px) 0 clamp(40px, 5vw, 62px);
     }
 
     .hero-slogan {
@@ -274,14 +458,38 @@
     .hero-copy {
       max-width: 46ch;
       font-size: 1.05rem;
-      margin-top: 24px;
+      margin-top: 20px;
+      color: var(--deep-navy);
+    }
+
+    .hero-support {
+      margin-top: 14px;
+      max-width: 60ch;
+      font-size: 0.98rem;
     }
 
     .hero-actions {
-      margin-top: 42px;
+      margin-top: 30px;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 12px;
+    }
+
+    .hero-actions .btn {
+      flex: 0 0 auto;
+    }
+
+
+    .hero-entrance [data-hero-item] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.44s ease, transform 0.44s ease;
+      transition-delay: calc(var(--hero-order, 0) * 85ms + 45ms);
+    }
+
+    .hero-entrance.is-visible [data-hero-item] {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .btn {
@@ -297,7 +505,12 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.24s ease, border-color 0.24s ease, color 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(121, 231, 244, 0.3), 0 0 0 4px rgba(168, 139, 255, 0.16);
     }
 
     .btn-primary {
@@ -310,6 +523,8 @@
     .btn-primary:focus-visible {
       background: #53b8ea;
       border-color: #53b8ea;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(83, 184, 234, 0.2);
     }
 
     .btn-secondary {
@@ -323,11 +538,49 @@
       border-color: var(--bright-blue);
       color: var(--bright-blue);
       background: #eefbff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(102, 198, 242, 0.14);
+    }
+
+    .section-block.reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .section-block.reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section-block {
-      padding-top: clamp(56px, 7vw, 98px);
+      position: relative;
+      padding-top: clamp(66px, 8vw, 112px);
       border-top: 1px solid var(--line-blue);
+      overflow: visible;
+    }
+
+    .section-block::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -1px;
+      height: 1px;
+      background: rgba(207, 230, 241, 0.8);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.56s ease;
+      pointer-events: none;
+    }
+
+    .section-block.reveal-on-scroll.is-visible::before {
+      transform: scaleX(1);
+    }
+
+    .section-block > h2 {
+      margin-bottom: 26px;
     }
 
     .why-grid {
@@ -356,7 +609,7 @@
       width: min(320px, 58%);
       height: 1px;
       margin: 20px auto 24px;
-      background: color-mix(in srgb, var(--line-blue) 84%, white);
+      background: linear-gradient(90deg, rgba(73, 215, 207, 0.38), rgba(121, 231, 244, 0.34), rgba(168, 139, 255, 0.28));
     }
 
     .service-kicker {
@@ -397,16 +650,42 @@
     }
 
     .steps-grid {
-      margin-top: 30px;
+      margin-top: 36px;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(18px, 2.4vw, 30px);
+      column-gap: clamp(16px, 2vw, 26px);
+      row-gap: 0;
     }
 
     .step-item {
+      position: relative;
+      padding: 24px 0 24px 18px;
       display: grid;
-      gap: 8px;
+      gap: 10px;
       align-content: start;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.36s ease, transform 0.36s ease;
+      transition-delay: var(--step-delay, 0ms);
+    }
+
+    .step-item:first-child {
+      padding-left: 0;
+    }
+
+    .step-item:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 24px;
+      bottom: 24px;
+      width: 1px;
+      background: rgba(207, 230, 241, 0.86);
+    }
+
+    .step-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .step-number {
@@ -417,10 +696,18 @@
       font-family: var(--serif);
     }
 
-    .step-item p {
+    .step-title {
       color: var(--deep-navy);
-      font-size: 0.98rem;
-      max-width: 18ch;
+      font-size: 1.04rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .step-description {
+      color: var(--deep-navy);
+      font-size: 0.95rem;
+      line-height: 1.52;
+      max-width: 25ch;
     }
 
     .faq-list {
@@ -451,6 +738,15 @@
     }
 
     .faq-panel {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      transition: max-height 0.24s ease, opacity 0.2s ease, padding 0.2s ease;
+    }
+
+    .faq-item.is-open .faq-panel {
+      opacity: 1;
       padding: 0 0 14px;
     }
 
@@ -466,6 +762,20 @@
       padding-bottom: clamp(86px, 10vw, 132px);
       display: grid;
       gap: clamp(30px, 4vw, 44px);
+      position: relative;
+      border-top: 0;
+    }
+
+    .home-footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -1px;
+      height: 1px;
+      background: var(--brand-gradient);
+      pointer-events: none;
+      opacity: 0.62;
     }
 
     .footer-main {
@@ -538,13 +848,33 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .footer-social-link::before {
+      content: "";
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(73, 215, 207, 0.16), rgba(121, 231, 244, 0.16), rgba(168, 139, 255, 0.16));
+      transform: scale(0.65);
+      opacity: 0;
+      transition: transform 0.24s ease, opacity 0.24s ease;
+      pointer-events: none;
     }
 
     .footer-social-link:hover,
     .footer-social-link:focus-visible {
       color: var(--bright-blue);
       transform: translateY(-3px);
+    }
+
+    .footer-social-link:hover::before,
+    .footer-social-link:focus-visible::before {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .footer-social-link svg {
@@ -584,6 +914,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.24s ease;
+    }
+
+    .sticky-book.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .sticky-book.hidden {
@@ -591,6 +931,7 @@
     }
 
     .book-btn {
+      position: relative;
       min-height: 44px;
       padding: 0 16px;
       border-radius: 14px;
@@ -602,13 +943,145 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+      transition: background-color 0.24s ease, border-color 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
     }
 
     .book-btn:hover,
     .book-btn:focus-visible {
-      background: #53b8ea;
-      border-color: #53b8ea;
+      border-color: transparent;
+      background:
+        linear-gradient(#53b8ea, #53b8ea) padding-box,
+        var(--brand-gradient) border-box;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(83, 184, 234, 0.2);
+    }
+
+    #home-top,
+    #service-area,
+    #how-it-works,
+    #contact {
+      position: relative;
+    }
+
+    .decor-art {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      color: rgba(57, 102, 142, 0.9);
+    }
+
+    .decor-art path,
+    .decor-art circle,
+    .decor-art ellipse,
+    .decor-art line {
+      vector-effect: non-scaling-stroke;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .signature-watermark {
+      opacity: 0.03;
+    }
+
+    .signature-watermark path {
+      fill: none;
+      stroke: rgba(80, 153, 167, 0.72);
+      stroke-width: 1.6;
+    }
+
+    .decor-bubbles {
+      width: 84px;
+      height: 84px;
+      right: -126px;
+      top: -18px;
+      opacity: 0.05;
+    }
+
+    .decor-bubbles circle {
+      fill: none;
+      stroke: rgba(111, 174, 196, 0.78);
+      stroke-width: 1.2;
+    }
+
+    .decor-service-signature {
+      width: 140px;
+      height: 64px;
+      right: -54px;
+      top: -4px;
+    }
+
+    .decor-how-squeegee {
+      width: 116px;
+      height: 58px;
+      right: -74px;
+      bottom: -60px;
+      opacity: 0.04;
+    }
+
+    .decor-how-squeegee path,
+    .decor-how-squeegee line {
+      fill: none;
+      stroke: rgba(80, 132, 167, 0.76);
+      stroke-width: 1.3;
+    }
+
+    .decor-footer-signature {
+      width: 150px;
+      height: 70px;
+      right: -62px;
+      top: -16px;
+    }
+
+    .decor-animate {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.62s ease, transform 0.62s ease;
+    }
+
+    .decor-animate.is-visible {
+      opacity: var(--decor-opacity, 0.04);
+      transform: translateY(0);
+    }
+
+    .draw-path {
+      stroke-dasharray: 280;
+      stroke-dashoffset: 280;
+      transition: stroke-dashoffset 1.24s ease;
+    }
+
+    .decor-animate.is-visible .draw-path {
+      stroke-dashoffset: 0;
+    }
+
+    .bubble-drift {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .decor-animate.is-visible .bubble-drift {
+      animation: bubbleLift 1.7s ease-out 1 both;
+    }
+
+    .wipe-line {
+      stroke-dasharray: 130;
+      stroke-dashoffset: 130;
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .decor-animate.is-visible .wipe-line {
+      stroke-dashoffset: 0;
+    }
+
+    @keyframes bubbleLift {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-10px);
+        opacity: 0.6;
+      }
     }
 
     .book-dismiss {
@@ -691,9 +1164,9 @@
     input:focus,
     select:focus,
     textarea:focus {
-      outline: 2px solid color-mix(in srgb, var(--icy-aqua) 66%, white);
+      outline: none;
       border-color: var(--bright-blue);
-      outline-offset: 1px;
+      box-shadow: 0 0 0 2px rgba(121, 231, 244, 0.28), 0 0 0 4px rgba(168, 139, 255, 0.14);
     }
 
     .form-help {
@@ -759,6 +1232,41 @@
         pointer-events: auto;
       }
 
+      .nav-link {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.2s ease, transform 0.24s ease;
+      }
+
+      .nav-links.open .nav-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .nav-links.open .nav-link:nth-child(1) {
+        transition-delay: 40ms;
+      }
+
+      .nav-links.open .nav-link:nth-child(2) {
+        transition-delay: 80ms;
+      }
+
+      .nav-links.open .nav-link:nth-child(3) {
+        transition-delay: 120ms;
+      }
+
+      .nav-links.open .nav-link:nth-child(4) {
+        transition-delay: 160ms;
+      }
+
+      .nav-links.open .nav-link:nth-child(5) {
+        transition-delay: 200ms;
+      }
+
+      .nav-links.open .nav-link:nth-child(6) {
+        transition-delay: 240ms;
+      }
+
       .topbar-row {
         grid-template-columns: auto auto;
         justify-content: space-between;
@@ -782,6 +1290,30 @@
 
       .steps-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 0;
+      }
+
+      .step-item:nth-child(odd) {
+        padding-left: 0;
+      }
+
+      .step-item:nth-child(odd)::before {
+        display: none;
+      }
+
+      .step-item:nth-child(n + 3) {
+        margin-top: 24px;
+        padding-top: 24px;
+      }
+
+      .step-item:nth-child(n + 3)::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background: rgba(207, 230, 241, 0.82);
       }
 
       .split,
@@ -792,7 +1324,11 @@
 
     @media (max-width: 700px) {
       .site-shell::before {
-        background: none;
+        opacity: 0.56;
+      }
+
+      .site-shell::after {
+        opacity: 0.72;
       }
 
       .container {
@@ -805,6 +1341,12 @@
 
       .hero-actions {
         margin-top: 36px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
       }
 
       .btn {
@@ -821,6 +1363,24 @@
       .availability-grid,
       .split {
         grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        row-gap: 0;
+      }
+
+      .step-item {
+        padding: 24px 0;
+      }
+
+      .step-item::before,
+      .step-item::after {
+        display: none;
+      }
+
+      .step-item + .step-item {
+        margin-top: 24px;
+        border-top: 1px solid rgba(207, 230, 241, 0.82);
       }
 
       .service-grid {
@@ -845,6 +1405,23 @@
 
       .footer-email {
         margin: 0 auto;
+      }
+
+      .decor-mobile-hide {
+        display: none;
+      }
+
+      .booking-modal-panel {
+        width: calc(100% - 14px);
+        margin: 7px;
+        border-radius: 14px;
+        max-height: calc(100vh - 14px);
+      }
+
+      .booking-modal-calendar {
+        min-height: 560px;
+        height: calc(100vh - 14px);
+        max-height: calc(100vh - 14px);
       }
     }
 
@@ -875,11 +1452,61 @@
         animation: none !important;
         transition: none !important;
       }
+
+      .edge-droplet-layer {
+        display: none !important;
+      }
+
+      .hero-entrance [data-hero-item],
+      .section-block.reveal-on-scroll,
+      .step-item {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .section-block::after,
+      .nav-link::after,
+      .topbar::after,
+      .footer-social-link::before {
+        transition: none !important;
+      }
+
+      .decor-animate {
+        opacity: var(--decor-opacity, 0.04) !important;
+        transform: none !important;
+      }
+
+      .draw-path,
+      .wipe-line {
+        stroke-dashoffset: 0 !important;
+      }
+
+      .nav-link {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .faq-panel {
+        transition: opacity 0.12s linear;
+      }
+
+      .sticky-book {
+        opacity: 1;
+        transform: none;
+      }
+
+      body.booking-modal-open .site-shell,
+      .booking-modal {
+        filter: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
   <div class="site-shell" id="siteShell">
+    <div class="edge-droplet-layer" id="edgeDropletLayer" aria-hidden="true"></div>
+
     <header class="topbar">
       <div class="container topbar-row">
         <a class="logo" href="#home-top" id="logoLink" aria-label="Scrub Club 801 home">
@@ -895,7 +1522,7 @@
           <a class="nav-link" href="#contact" data-section-link="contact">Contact</a>
         </nav>
 
-        <button class="btn btn-primary header-cta" type="button" data-open-view="quote">Request a Free Quote</button>
+        <button class="btn btn-primary header-cta" type="button" data-open-view="quote">Request a Quote</button>
 
         <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
           <span class="mobile-toggle-line"></span>
@@ -908,20 +1535,28 @@
     <main class="view-wrap" id="viewWrap">
       <section class="view active" id="view-home" data-view="home">
         <div class="container hero-layout" id="home-top" aria-label="Hero">
-          <div>
-            <h1>Scrub Club 801</h1>
-            <p class="hero-slogan">Based in Draper, Utah</p>
-            <p class="hero-copy">Professional home cleaning,<br />vehicle detailing,<br />and specialty care.</p>
+          <div class="hero-entrance">
+            <h1 data-hero-item style="--hero-order: 1;">Scrub Club 801</h1>
+            <p class="hero-slogan" data-hero-item style="--hero-order: 0;">Based in Draper, Utah</p>
+            <p class="hero-copy" data-hero-item style="--hero-order: 2;">Professional home cleaning, vehicle detailing, and specialty care.</p>
+            <p class="hero-support" data-hero-item style="--hero-order: 3;">Serving Draper and nearby communities with thoughtful, dependable service designed around your schedule.</p>
 
-            <div class="hero-actions">
-              <button class="btn btn-primary" type="button" data-open-view="quote">Request a Free Quote</button>
+            <div class="hero-actions" data-hero-item style="--hero-order: 4;">
+              <button class="btn btn-primary" type="button" data-open-view="quote">Request a Quote</button>
               <button class="btn btn-secondary" type="button" data-open-view="availability">View Availability</button>
             </div>
+
           </div>
+
+          <svg class="decor-art decor-bubbles decor-animate decor-mobile-hide" style="--decor-opacity: 0.05;" viewBox="0 0 84 84" aria-hidden="true" focusable="false">
+            <circle class="bubble-drift" cx="24" cy="56" r="9"></circle>
+            <circle class="bubble-drift" cx="44" cy="36" r="6"></circle>
+            <circle class="bubble-drift" cx="62" cy="22" r="4"></circle>
+            <path class="draw-path" d="M8 66C20 63 30 54 38 45C45 37 50 28 60 22"></path>
+          </svg>
         </div>
 
         <div class="container section-block" id="why-us">
-          <p class="view-title">Why Choose Scrub Club</p>
           <h2>Why Choose Scrub Club</h2>
           <div class="why-grid" aria-label="Why choose us">
             <article class="why-item">
@@ -944,8 +1579,13 @@
         </div>
 
         <div class="container section-block" id="service-area">
-          <p class="view-title">Service Area</p>
           <h2>Based in Draper, Utah</h2>
+
+          <svg class="decor-art signature-watermark decor-service-signature decor-animate decor-mobile-hide" style="--decor-opacity: 0.03;" viewBox="0 0 180 78" aria-hidden="true" focusable="false">
+            <path class="draw-path" d="M10 56C28 29 48 24 67 39C85 53 102 53 122 35C138 21 152 19 170 29"></path>
+            <path d="M16 63C35 48 52 49 71 61C88 71 103 68 118 57"></path>
+          </svg>
+
           <p class="service-kicker">Serving</p>
 
           <div class="service-divider" aria-hidden="true"></div>
@@ -966,22 +1606,34 @@
 
         <div class="container section-block" id="how-it-works">
           <h2>How It Works</h2>
+
+          <svg class="decor-art decor-how-squeegee decor-animate decor-mobile-hide" style="--decor-opacity: 0.04;" viewBox="0 0 132 58" aria-hidden="true" focusable="false">
+            <path d="M12 42h72"></path>
+            <line class="wipe-line" x1="20" y1="32" x2="96" y2="32"></line>
+            <path d="M94 24l12 8l-6 11l-12 -7z"></path>
+            <path d="M94 24l10 -12"></path>
+          </svg>
+
           <div class="steps-grid" aria-label="How it works steps">
             <article class="step-item">
               <p class="step-number">01</p>
-              <p>Request a quote</p>
+              <p class="step-title">Request a Quote</p>
+              <p class="step-description">Tell us what you're looking for and we'll prepare a personalized estimate.</p>
             </article>
             <article class="step-item">
               <p class="step-number">02</p>
-              <p>Choose your date</p>
+              <p class="step-title">Choose a Date</p>
+              <p class="step-description">Pick a day and time that works best for your schedule.</p>
             </article>
             <article class="step-item">
               <p class="step-number">03</p>
-              <p>We confirm details</p>
+              <p class="step-title">We Confirm Everything</p>
+              <p class="step-description">We'll reach out to confirm the details before your appointment.</p>
             </article>
             <article class="step-item">
               <p class="step-number">04</p>
-              <p>Enjoy your refreshed space</p>
+              <p class="step-title">Enjoy Your Refreshed Space</p>
+              <p class="step-description">Relax while we take care of the cleaning.</p>
             </article>
           </div>
         </div>
@@ -1022,13 +1674,18 @@
             <div class="faq-item">
               <h3><button class="faq-trigger" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">How do I request a quote?</button></h3>
               <div class="faq-panel" id="faq-a-6" role="region" aria-labelledby="faq-q-6" hidden>
-                <p>Click the Request a Free Quote button and share a few details about the service you need. We will review your request and follow up as soon as possible with next steps and any additional information we need.</p>
+                <p>Click the Request a Quote button and share a few details about the service you need. We will review your request and follow up as soon as possible with next steps and any additional information we need.</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="container section-block home-footer" id="contact">
+          <svg class="decor-art signature-watermark decor-footer-signature decor-animate decor-mobile-hide" style="--decor-opacity: 0.028;" viewBox="0 0 180 84" aria-hidden="true" focusable="false">
+            <path class="draw-path" d="M12 58C30 33 52 31 72 45C89 56 107 53 125 36C140 23 156 20 170 28"></path>
+            <path d="M17 67C39 54 55 55 74 66C88 74 103 73 118 64"></path>
+          </svg>
+
           <div class="footer-main">
             <div class="footer-left">
               <h2 class="footer-brand">Scrub Club 801</h2>
@@ -1064,7 +1721,7 @@
                 </a>
               </div>
               <p class="footer-handle">@ScrubClub801</p>
-              <button class="btn btn-primary footer-quote-btn" type="button" data-open-view="quote">Request a Free Quote</button>
+              <button class="btn btn-primary footer-quote-btn" type="button" data-open-view="quote">Request a Quote</button>
             </div>
           </div>
 
@@ -1078,7 +1735,6 @@
       <section class="view" id="view-quote" data-view="quote">
         <div class="container split">
           <div>
-            <p class="view-title">Free Quote</p>
             <h2>Request a quote for your home or vehicle.</h2>
             <p style="margin-top: 14px; max-width: 580px;">
               Share the basics and preferred timing. We will follow up to confirm details and next steps.
@@ -1154,7 +1810,6 @@
 
       <section class="view" id="view-availability" data-view="availability">
         <div class="container">
-          <p class="view-title">Availability</p>
           <h2>Request your preferred date and time.</h2>
           <p style="margin-top: 14px; max-width: 640px;">
             We can confirm appointments after reviewing your request. This page does not show live calendar slots.
@@ -1181,8 +1836,16 @@
     </main>
 
     <div class="sticky-book" id="stickyBook">
-      <button class="book-btn" type="button" data-open-view="quote">Book Now</button>
+      <button class="book-btn" type="button" data-open-booking-modal>Book Now</button>
       <button class="book-dismiss" id="bookDismiss" type="button" aria-label="Dismiss book button">×</button>
+    </div>
+  </div>
+
+  <div class="booking-modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Book an appointment">
+    <div class="booking-modal-backdrop" data-close-booking-modal></div>
+    <div class="booking-modal-panel">
+      <button class="booking-modal-close" id="bookingModalClose" type="button" aria-label="Close booking modal">×</button>
+      <div class="booking-modal-calendar" id="bookingModalCalendar"></div>
     </div>
   </div>
 
@@ -1202,9 +1865,117 @@
     const mobileToggle = document.getElementById("mobileToggle");
     const viewTriggers = Array.from(document.querySelectorAll("[data-open-view]"));
     const faqTriggers = Array.from(document.querySelectorAll(".faq-trigger"));
+    const sectionBlocks = Array.from(document.querySelectorAll("#view-home .section-block"));
+    const howStepItems = Array.from(document.querySelectorAll("#how-it-works .step-item"));
+    const decorElements = Array.from(document.querySelectorAll(".decor-animate"));
     const stickyBook = document.getElementById("stickyBook");
     const bookDismiss = document.getElementById("bookDismiss");
+    const bookingModal = document.getElementById("bookingModal");
+    const bookingModalClose = document.getElementById("bookingModalClose");
+    const bookingModalCalendar = document.getElementById("bookingModalCalendar");
+    const bookingModalOpeners = Array.from(document.querySelectorAll("[data-open-booking-modal]"));
+    const bookingModalBackdrop = document.querySelector("[data-close-booking-modal]");
+    const edgeDropletLayer = document.getElementById("edgeDropletLayer");
+    const heroNode = document.getElementById("home-top");
+    const heroEntrance = document.querySelector(".hero-entrance");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const sectionIds = ["home-top", "why-us", "service-area", "how-it-works", "faq", "contact"];
+    let bookingModalScrollY = 0;
+    let bookingEmbedInitialized = false;
+
+    function initBookingEmbed() {
+      if (bookingEmbedInitialized || !bookingModalCalendar) {
+        return;
+      }
+
+      (function (C, A, L) {
+        let p = function (a, ar) {
+          a.q.push(ar);
+        };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else {
+              p(cal, ar);
+            }
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+
+      window.Cal("init", "club-scrub-101-29d0vo", { origin: "https://cal.com" });
+      window.Cal.ns["club-scrub-101-29d0vo"]("inline", {
+        elementOrSelector: "#bookingModalCalendar",
+        calLink: "club-scrub-101-29d0vo/book",
+        config: { layout: "month_view" }
+      });
+      window.Cal.ns["club-scrub-101-29d0vo"]("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      });
+
+      bookingEmbedInitialized = true;
+    }
+
+    function activeHomeSection() {
+      const active = navLinks.find((link) => link.classList.contains("active") && link.dataset.sectionLink);
+      return active ? active.dataset.sectionLink : "home-top";
+    }
+
+    function openBookingModal(updateHistory = true) {
+      if (!bookingModal || bookingModal.classList.contains("open")) {
+        return;
+      }
+
+      renderView("home", { scrollTop: false });
+      initBookingEmbed();
+
+      bookingModalScrollY = window.scrollY;
+      document.body.classList.add("booking-modal-open");
+      document.body.style.top = `-${bookingModalScrollY}px`;
+      bookingModal.classList.add("open");
+      bookingModal.setAttribute("aria-hidden", "false");
+
+      if (updateHistory) {
+        history.pushState({ view: "home", modal: "booking" }, "", "#availability");
+      }
+    }
+
+    function closeBookingModal(updateHistory = true) {
+      if (!bookingModal || !bookingModal.classList.contains("open")) {
+        return;
+      }
+
+      bookingModal.classList.remove("open");
+      bookingModal.setAttribute("aria-hidden", "true");
+
+      document.body.classList.remove("booking-modal-open");
+      document.body.style.top = "";
+      window.scrollTo({ top: bookingModalScrollY, behavior: "instant" });
+
+      if (updateHistory && window.location.hash === "#availability") {
+        const section = activeHomeSection();
+        history.replaceState({ view: "home", section }, "", `#${section}`);
+      }
+    }
 
     function normalizeView(value) {
       return Object.prototype.hasOwnProperty.call(views, value) ? value : "home";
@@ -1213,23 +1984,31 @@
     function parseHashState() {
       const raw = window.location.hash.replace("#", "").trim();
       if (!raw) {
-        return { view: "home", section: "home-top" };
+        return { view: "home", section: "home-top", modal: null };
+      }
+
+      if (raw === "availability") {
+        return { view: "home", section: "home-top", modal: "booking" };
       }
 
       if (Object.prototype.hasOwnProperty.call(views, raw)) {
-        return { view: normalizeView(raw), section: null };
+        return { view: normalizeView(raw), section: null, modal: null };
       }
 
       if (document.getElementById(raw)) {
-        return { view: "home", section: raw };
+        return { view: "home", section: raw, modal: null };
       }
 
-      return { view: "home", section: "home-top" };
+      return { view: "home", section: "home-top", modal: null };
     }
 
     function closeNav() {
       nav.classList.remove("open");
       mobileToggle.setAttribute("aria-expanded", "false");
+
+      navLinks.forEach((link) => {
+        link.style.transitionDelay = "0ms";
+      });
     }
 
     function setActiveNav(sectionId) {
@@ -1325,28 +2104,84 @@
         }
 
         event.preventDefault();
+        if (targetView === "availability") {
+          openBookingModal(true);
+          return;
+        }
         openView(targetView, true);
       });
+    });
+
+    bookingModalOpeners.forEach((node) => {
+      node.addEventListener("click", (event) => {
+        event.preventDefault();
+        openBookingModal(true);
+      });
+    });
+
+    bookingModalClose?.addEventListener("click", () => {
+      closeBookingModal(true);
+    });
+
+    bookingModalBackdrop?.addEventListener("click", () => {
+      closeBookingModal(true);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeBookingModal(true);
+      }
     });
 
     faqTriggers.forEach((trigger) => {
       trigger.addEventListener("click", () => {
         const panelId = trigger.getAttribute("aria-controls");
         const panel = panelId ? document.getElementById(panelId) : null;
+        const parentItem = trigger.closest(".faq-item");
         const willOpen = trigger.getAttribute("aria-expanded") !== "true";
+
+        function closePanel(targetPanel) {
+          if (!targetPanel || targetPanel.hidden) {
+            return;
+          }
+
+          targetPanel.style.maxHeight = `${targetPanel.scrollHeight}px`;
+          requestAnimationFrame(() => {
+            targetPanel.style.maxHeight = "0px";
+          });
+
+          const onDone = () => {
+            if (targetPanel.style.maxHeight === "0px") {
+              targetPanel.hidden = true;
+            }
+          };
+
+          targetPanel.addEventListener("transitionend", onDone, { once: true });
+          window.setTimeout(onDone, 280);
+        }
 
         faqTriggers.forEach((item) => {
           item.setAttribute("aria-expanded", "false");
+          const parent = item.closest(".faq-item");
+          if (parent) {
+            parent.classList.remove("is-open");
+          }
+
           const currentId = item.getAttribute("aria-controls");
           const currentPanel = currentId ? document.getElementById(currentId) : null;
           if (currentPanel) {
-            currentPanel.hidden = true;
+            closePanel(currentPanel);
           }
         });
 
-        if (panel && willOpen) {
+        if (panel && parentItem && willOpen) {
           trigger.setAttribute("aria-expanded", "true");
+          parentItem.classList.add("is-open");
           panel.hidden = false;
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = `${panel.scrollHeight}px`;
+          });
+          return;
         }
       });
     });
@@ -1362,6 +2197,15 @@
         window.sessionStorage.setItem(key, "1");
       });
     }
+
+    sectionBlocks.forEach((section, index) => {
+      section.classList.add("reveal-on-scroll");
+      section.style.setProperty("--reveal-delay", `${Math.min(index * 35, 140)}ms`);
+    });
+
+    howStepItems.forEach((step, index) => {
+      step.style.setProperty("--step-delay", `${Math.min(index * 65, 210)}ms`);
+    });
 
     const sectionObserver = new IntersectionObserver((entries) => {
       const homeVisible = document.getElementById("view-home").classList.contains("active");
@@ -1387,7 +2231,72 @@
       }
     });
 
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+
+    sectionBlocks.forEach((section) => {
+      if (prefersReducedMotion) {
+        section.classList.add("is-visible");
+      } else {
+        revealObserver.observe(section);
+      }
+    });
+
+    const stepsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.3, rootMargin: "0px 0px -6% 0px" });
+
+    howStepItems.forEach((step) => {
+      if (prefersReducedMotion) {
+        step.classList.add("is-visible");
+      } else {
+        stepsObserver.observe(step);
+      }
+    });
+
+    const decorObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+
+    decorElements.forEach((decor) => {
+      if (prefersReducedMotion) {
+        decor.classList.add("is-visible");
+      } else {
+        decorObserver.observe(decor);
+      }
+    });
+
     window.addEventListener("popstate", (event) => {
+      closeBookingModal(false);
+
+      if (event.state && event.state.modal === "booking") {
+        renderView("home", { scrollTop: false });
+        openBookingModal(false);
+        return;
+      }
+
       if (event.state && event.state.view && event.state.view !== "home") {
         renderView(normalizeView(event.state.view), { scrollTop: true });
         return;
@@ -1395,6 +2304,12 @@
 
       const parsed = parseHashState();
       renderView(parsed.view, { scrollTop: false });
+
+      if (parsed.modal === "booking") {
+        openBookingModal(false);
+        return;
+      }
+
       if (parsed.view === "home") {
         const target = parsed.section || "home-top";
         const sectionNode = document.getElementById(target);
@@ -1407,6 +2322,10 @@
 
     const initialState = parseHashState();
     renderView(initialState.view, { scrollTop: false });
+
+    if (initialState.modal === "booking") {
+      openBookingModal(false);
+    }
 
     if (initialState.view === "home") {
       const initialSection = initialState.section || "home-top";
@@ -1424,8 +2343,102 @@
       topbar.classList.toggle("is-scrolled", window.scrollY > 8);
     }
 
+    function syncReadProgress() {
+      const doc = document.documentElement;
+      const scrollable = Math.max(doc.scrollHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
+      doc.style.setProperty("--read-progress", progress.toFixed(4));
+    }
+
+    function syncStickyBook() {
+      if (!stickyBook || stickyBook.classList.contains("hidden")) {
+        return;
+      }
+
+      const threshold = heroNode ? heroNode.offsetHeight * 0.72 : 420;
+      stickyBook.classList.toggle("is-visible", window.scrollY > threshold);
+    }
+
+    let dropletTimerId = null;
+    let activeDroplet = null;
+
+    function canShowEdgeDroplet() {
+      const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+      return Boolean(edgeDropletLayer) && !prefersReducedMotion && isFinePointer && window.innerWidth >= 980;
+    }
+
+    function clearEdgeDropletTimer() {
+      if (dropletTimerId) {
+        window.clearTimeout(dropletTimerId);
+        dropletTimerId = null;
+      }
+    }
+
+    function clearActiveDroplet() {
+      if (!activeDroplet) {
+        return;
+      }
+
+      activeDroplet.remove();
+      activeDroplet = null;
+    }
+
+    function spawnEdgeDroplet() {
+      if (!canShowEdgeDroplet() || activeDroplet) {
+        return;
+      }
+
+      const droplet = document.createElement("span");
+      droplet.className = `edge-droplet ${Math.random() < 0.5 ? "left" : "right"}`;
+      droplet.style.setProperty("--drop-duration", `${Math.round(8600 + Math.random() * 1600)}ms`);
+      edgeDropletLayer.appendChild(droplet);
+      activeDroplet = droplet;
+
+      droplet.addEventListener("animationend", () => {
+        if (activeDroplet === droplet) {
+          activeDroplet = null;
+        }
+        droplet.remove();
+      }, { once: true });
+    }
+
+    function scheduleEdgeDroplet() {
+      clearEdgeDropletTimer();
+
+      if (!canShowEdgeDroplet()) {
+        clearActiveDroplet();
+        return;
+      }
+
+      const delay = Math.round(15000 + Math.random() * 5000);
+      dropletTimerId = window.setTimeout(() => {
+        spawnEdgeDroplet();
+        scheduleEdgeDroplet();
+      }, delay);
+    }
+
     syncTopbarState();
+    syncReadProgress();
+    syncStickyBook();
+
+    if (prefersReducedMotion) {
+      heroEntrance?.classList.add("is-visible");
+    } else {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          heroEntrance?.classList.add("is-visible");
+        });
+      });
+    }
+
     window.addEventListener("scroll", syncTopbarState, { passive: true });
+    window.addEventListener("scroll", syncReadProgress, { passive: true });
+    window.addEventListener("scroll", syncStickyBook, { passive: true });
+    window.addEventListener("resize", syncStickyBook);
+    window.addEventListener("resize", syncReadProgress);
+    window.addEventListener("resize", scheduleEdgeDroplet);
+
+    scheduleEdgeDroplet();
 
     const quoteForm = document.getElementById("quoteForm");
     const quoteFormMessage = document.getElementById("quoteFormMessage");

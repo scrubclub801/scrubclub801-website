@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Messages</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="employee">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Messages</h1>
+            <p class="staff-subtitle">Customer inbox for appointment updates, quote questions, and service follow-ups.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button">New Message</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="customers">Open Client List</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Unread</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">No unread messages are recorded</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Responded Today</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">Response metrics update from saved threads</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Follow-Ups Due</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">Follow-ups appear when notes require action</p>
+          </article>
+        </div>
+
+        <div class="staff-empty-state">
+          <h3>No client messages are available yet.</h3>
+          <p>Message records will appear here after an appointment or quote thread is created.</p>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Priority Queue</h2>
+            </div>
+            <div class="staff-empty-state small">
+              <p>No priority responses are currently due.</p>
+            </div>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Team Availability</h2>
+            </div>
+            <div class="staff-empty-state small">
+              <p>Availability updates will display when staff schedules are saved.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>

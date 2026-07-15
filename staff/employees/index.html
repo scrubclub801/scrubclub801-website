@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Employees</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="employee">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Employees</h1>
+            <p class="staff-subtitle">Team roster, shift planning, certification health, and productivity highlights.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button">Add Employee</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="training">Review Training Records</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Active Team Members</p>
+            <p class="staff-kpi-value">14</p>
+            <p class="staff-kpi-trend">12 field staff, 2 office staff</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">On Shift Now</p>
+            <p class="staff-kpi-value">8</p>
+            <p class="staff-kpi-trend">2 routes currently in progress</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Training Complete</p>
+            <p class="staff-kpi-value">11</p>
+            <p class="staff-kpi-trend">3 employees in active training</p>
+          </article>
+        </div>
+
+        <div class="staff-table-wrap">
+          <table class="staff-table" aria-label="Employees table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Role</th>
+                <th>Shift</th>
+                <th>Today Jobs</th>
+                <th>Training</th>
+                <th>Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nella Ruiz</td>
+                <td>Manager</td>
+                <td>7:30 AM to 4:30 PM</td>
+                <td>4</td>
+                <td><span class="badge success">Complete</span></td>
+                <td>4.9 Avg</td>
+              </tr>
+              <tr>
+                <td>Baylee Shaw</td>
+                <td>Manager</td>
+                <td>8:00 AM to 5:00 PM</td>
+                <td>3</td>
+                <td><span class="badge success">Complete</span></td>
+                <td>4.8 Avg</td>
+              </tr>
+              <tr>
+                <td>Carlos Ramirez</td>
+                <td>Employee</td>
+                <td>8:30 AM to 5:30 PM</td>
+                <td>3</td>
+                <td><span class="badge">In Progress</span></td>
+                <td>4.7 Avg</td>
+              </tr>
+              <tr>
+                <td>Maya Chen</td>
+                <td>Employee</td>
+                <td>9:00 AM to 6:00 PM</td>
+                <td>2</td>
+                <td><span class="badge warning">Final Quiz Pending</span></td>
+                <td>4.8 Avg</td>
+              </tr>
+              <tr>
+                <td>Sofia Grant</td>
+                <td>Employee</td>
+                <td>7:00 AM to 3:30 PM</td>
+                <td>4</td>
+                <td><span class="badge success">Complete</span></td>
+                <td>4.9 Avg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="staff-grid staff-grid-3x">
+          <article class="staff-card">
+            <h3>Shift Coverage</h3>
+            <p>Coverage is balanced across morning and afternoon blocks with one relief team available.</p>
+          </article>
+          <article class="staff-card">
+            <h3>Top Performer</h3>
+            <p>Sofia Grant achieved 12 five-star customer reviews in the last 14 days.</p>
+          </article>
+          <article class="staff-card">
+            <h3>Coaching Queue</h3>
+            <p>2 teammates scheduled for coaching on speed-to-checklist completion this Friday.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>

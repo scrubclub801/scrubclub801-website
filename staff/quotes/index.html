@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Quotes</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="employee">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Quotes</h1>
+            <p class="staff-subtitle">Pipeline management for incoming quote requests, follow-ups, and conversion outcomes.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button">Create Manual Quote</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="appointments">Convert to Appointment</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Open Requests</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">No quote requests are pending</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Conversion Rate</p>
+            <p class="staff-kpi-value">0%</p>
+            <p class="staff-kpi-trend">Updates after quotes are accepted</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Average Ticket</p>
+            <p class="staff-kpi-value">$0.00</p>
+            <p class="staff-kpi-trend">Calculated from paid services only</p>
+          </article>
+        </div>
+
+        <div class="staff-empty-state">
+          <h3>No quotes have been submitted yet.</h3>
+          <p>Quote records will appear here after a quote request is saved.</p>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Follow-up Queue</h2>
+              <button class="staff-mini-link" type="button">View All</button>
+            </div>
+            <div class="staff-empty-state small">
+              <p>No quote follow-ups are due at this time.</p>
+            </div>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Quote Funnel</h2>
+            </div>
+            <div class="staff-funnel">
+              <div><span>New</span><b>0</b></div>
+              <div><span>Qualified</span><b>0</b></div>
+              <div><span>Sent</span><b>0</b></div>
+              <div><span>Won</span><b>0</b></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>

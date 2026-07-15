@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrub Club 801 | Staff Login</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body>
+  <main class="staff-login-shell">
+    <section class="staff-login-card" aria-labelledby="staff-login-title">
+      <a class="staff-logo" href="/" aria-label="Scrub Club 801 public site">Scrub Club 801</a>
+      <h1 class="staff-login-title" id="staff-login-title">Staff Portal</h1>
+      <p class="staff-login-subtitle">Sign in with your staff account to access internal operations pages.</p>
+
+      <form class="staff-form" id="staffLoginForm" novalidate>
+        <div class="staff-field">
+          <label for="staffEmail">Email</label>
+          <input id="staffEmail" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="staff-field">
+          <label for="staffPassword">Password</label>
+          <input id="staffPassword" name="password" type="password" autocomplete="current-password" required />
+        </div>
+
+        <div class="staff-row">
+          <label class="staff-checkbox" for="staffRemember">
+            <input id="staffRemember" name="remember" type="checkbox" />
+            <span>Remember Me</span>
+          </label>
+
+          <a class="staff-link" href="#" data-forgot-password>Forgot Password</a>
+        </div>
+
+        <button class="staff-button" type="submit">Sign In</button>
+        <button class="staff-access-link" type="button" data-open-admin-modal>Staff Access</button>
+        <p class="staff-message" data-login-message role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <div class="staff-admin-modal" data-admin-modal hidden>
+    <div class="staff-admin-backdrop" data-close-admin-modal></div>
+    <section
+      class="staff-admin-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="staff-admin-title"
+      aria-describedby="staff-admin-description"
+    >
+      <div data-admin-form-view>
+        <h2 id="staff-admin-title">Staff Access</h2>
+        <p class="staff-admin-description" id="staff-admin-description">Employee Name</p>
+
+        <form class="staff-admin-form" data-admin-form novalidate>
+          <label for="staffAccessEmployee">Employee Name</label>
+          <select id="staffAccessEmployee" name="staffAccessEmployee" required>
+            <option value="Nella">Nella</option>
+            <option value="Baylee">Baylee</option>
+          </select>
+
+          <label for="staffAccessPin">Access PIN</label>
+          <input id="staffAccessPin" name="staffAccessPin" type="password" autocomplete="off" required />
+          <p class="staff-message" data-admin-message role="status" aria-live="polite"></p>
+
+          <div class="staff-admin-actions">
+            <button class="staff-admin-cancel" type="button" data-close-admin-modal>Cancel</button>
+            <button class="staff-button" type="submit">Unlock</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="staff-welcome" data-admin-welcome-view hidden>
+        <div class="staff-confetti" data-confetti aria-hidden="true"></div>
+        <p class="staff-welcome-tone" data-welcome-tone>Good evening</p>
+        <h3 class="staff-welcome-title">Welcome back, <span data-welcome-name>Staff</span>.</h3>
+        <p class="staff-welcome-date" data-welcome-date></p>
+        <p class="staff-welcome-time" data-welcome-time></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/login.js"></script>
+  <script>
+    window.StaffLogin.init();
+  </script>
+</body>
+</html>

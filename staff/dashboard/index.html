@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal | Dashboard</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/staff/assets/css/staff.css" />
+</head>
+<body data-required-role="employee">
+  <div class="staff-shell">
+    <header class="staff-top">
+      <div class="staff-top-row">
+        <a class="staff-logo" href="/staff/dashboard/">Scrub Club 801 Staff Portal</a>
+        <div class="staff-top-meta">
+          <span data-email-display></span>
+          <span class="role-chip" data-role-display></span>
+          <button class="staff-signout" type="button" data-sign-out>Sign Out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="staff-main">
+      <aside class="staff-sidebar">
+        <nav class="staff-nav" data-staff-nav aria-label="Staff navigation"></nav>
+      </aside>
+
+      <section class="staff-content">
+        <div class="staff-page-head">
+          <div>
+            <h1 class="staff-title">Dashboard</h1>
+            <p class="staff-subtitle">Live operations overview for appointments, quotes, team performance, and customer communication.</p>
+          </div>
+          <div class="staff-quick-actions">
+            <button class="staff-button" type="button" data-nav-target="appointments">Create Appointment</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="quotes">Open Quotes Queue</button>
+          </div>
+        </div>
+
+        <div class="staff-kpi-grid">
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Today's Appointments</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">No appointments are scheduled yet</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Pending Quotes</p>
+            <p class="staff-kpi-value">0</p>
+            <p class="staff-kpi-trend">Quote requests will appear after submission</p>
+          </article>
+          <article class="staff-kpi-card">
+            <p class="staff-kpi-label">Revenue Today</p>
+            <p class="staff-kpi-value">$0.00</p>
+            <p class="staff-kpi-trend">Payment totals update from recorded jobs only</p>
+          </article>
+          <article class="staff-kpi-card staff-card-link" tabindex="0" role="link" data-nav-target="training">
+            <p class="staff-kpi-label">Training Status</p>
+            <p class="staff-kpi-value" data-training-status>Training Required</p>
+            <p class="staff-kpi-trend">Tap to review modules</p>
+          </article>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Today's Agenda</h2>
+              <button class="staff-mini-link" type="button" data-nav-target="appointments">Open Board</button>
+            </div>
+            <div class="staff-empty-state small">
+              <p>No appointments have been added yet.</p>
+            </div>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Revenue Snapshot</h2>
+              <button class="staff-mini-link" type="button" data-nav-target="analytics">Full Analytics</button>
+            </div>
+            <div class="staff-empty-state small">
+              <p>Revenue trends will appear after completed jobs are paid.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="staff-grid staff-grid-3x">
+          <article class="staff-card staff-card-link" tabindex="0" role="link" data-nav-target="quotes">
+            <h3>Pending Quote Requests</h3>
+            <p>No quote requests are currently pending.</p>
+            <ul class="staff-chip-row">
+              <li class="chip">Open 0</li>
+            </ul>
+          </article>
+          <article class="staff-card staff-card-link" tabindex="0" role="link" data-nav-target="messages">
+            <h3>Customer Messages</h3>
+            <p>No unresolved customer messages are recorded yet.</p>
+            <ul class="staff-chip-row">
+              <li class="chip">Unread 0</li>
+            </ul>
+          </article>
+          <article class="staff-card staff-card-link" tabindex="0" role="link" data-nav-target="inventory">
+            <h3>Inventory Health</h3>
+            <p>Inventory alerts will appear from saved supply records.</p>
+            <ul class="staff-chip-row">
+              <li class="chip">Low Stock 0</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="staff-layout-split">
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Recent Activity</h2>
+              <button class="staff-mini-link" type="button" data-nav-target="employees">Team Log</button>
+            </div>
+            <div class="staff-empty-state small">
+              <p>Recent activity will appear after staff complete services and reports.</p>
+            </div>
+          </article>
+
+          <article class="staff-card staff-panel">
+            <div class="staff-panel-head">
+              <h2 class="staff-section-title">Notifications</h2>
+              <button class="staff-mini-link" type="button" data-nav-target="messages">View Inbox</button>
+            </div>
+            <div class="staff-empty-state small">
+              <p>No notifications are active right now.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/staff/assets/js/config.js"></script>
+  <script src="/staff/assets/js/auth.js"></script>
+  <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/guard.js"></script>
+  <script src="/staff/assets/js/portal.js"></script>
+  <script>
+    window.StaffPortal.initProtectedPage();
+  </script>
+</body>
+</html>
