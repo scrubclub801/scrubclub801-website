@@ -14,7 +14,7 @@
   />
   <link rel="stylesheet" href="/staff/assets/css/staff.css" />
 </head>
-<body data-required-role="employee" data-training-page>
+<body data-required-role="trainee" data-training-page>
   <div class="staff-shell">
     <header class="staff-top">
       <div class="staff-top-row">
@@ -46,36 +46,37 @@
 
         <div class="staff-kpi-grid">
           <article class="staff-kpi-card">
-            <p class="staff-kpi-label">Completion Rate</p>
-            <p class="staff-kpi-value">79%</p>
-            <p class="staff-kpi-trend">11 of 14 active team members certified</p>
+            <p class="staff-kpi-label">Training Status</p>
+            <p class="staff-kpi-value">Training Not Started</p>
+            <p class="staff-kpi-trend">Training updates when an employee completes modules and quiz requirements.</p>
           </article>
           <article class="staff-kpi-card">
-            <p class="staff-kpi-label">In Progress</p>
-            <p class="staff-kpi-value">3</p>
-            <p class="staff-kpi-trend">2 are currently in final quiz stage</p>
+            <p class="staff-kpi-label">Monthly Updates</p>
+            <p class="staff-kpi-value">No training records yet.</p>
+            <p class="staff-kpi-trend">Updates appear after a manager publishes monthly training content.</p>
           </article>
           <article class="staff-kpi-card">
-            <p class="staff-kpi-label">Upcoming Reviews</p>
-            <p class="staff-kpi-value">5</p>
-            <p class="staff-kpi-trend">Recertification checks due this month</p>
+            <p class="staff-kpi-label">Certification Review</p>
+            <p class="staff-kpi-value">Waiting for employee activity.</p>
+            <p class="staff-kpi-trend">Review schedules depend on actual completion and recertification history.</p>
           </article>
         </div>
 
         <div data-training-root></div>
+        <div data-monthly-training-root></div>
 
         <div class="staff-grid staff-grid-3x">
           <article class="staff-card">
             <h3>Field Readiness Standard</h3>
-            <p>All employees complete safety, customer communication, and service execution before solo assignments.</p>
+            <p>Training progression starts at not started and advances only when employees complete required steps.</p>
           </article>
           <article class="staff-card">
             <h3>Manager Approval</h3>
-            <p>Managers review final quiz outcomes and approve certificates with timestamped records.</p>
+            <p>Managers review completion evidence and approve records with timestamped entries.</p>
           </article>
           <article class="staff-card">
             <h3>Continuous Improvement</h3>
-            <p>Training updates are refreshed monthly to reflect checklist updates and customer feedback trends.</p>
+            <p>Monthly updates and reminders are sourced from published materials and employee acknowledgements.</p>
           </article>
         </div>
       </section>
@@ -85,10 +86,16 @@
   <script src="/staff/assets/js/config.js"></script>
   <script src="/staff/assets/js/auth.js"></script>
   <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/staff-db.js"></script>
+  <script src="/staff/assets/js/training-updates.js"></script>
   <script src="/staff/assets/js/guard.js"></script>
   <script src="/staff/assets/js/portal.js"></script>
   <script>
-    window.StaffPortal.initProtectedPage();
+    window.StaffPortal.initProtectedPage().then(() => {
+      if (window.StaffTrainingUpdates) {
+        window.StaffTrainingUpdates.initTrainingUpdatesPage();
+      }
+    });
   </script>
 </body>
 </html>

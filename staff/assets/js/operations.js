@@ -334,6 +334,10 @@
           state.selectedClientId = button.getAttribute("data-open-client-timeline") || "";
           renderTimeline(state.selectedClientId);
           renderAiSummary();
+          const timelinePanel = root.querySelector("[data-client-timeline-root]");
+          if (timelinePanel && window.StaffPortal?.scrollToElement) {
+            window.StaffPortal.scrollToElement(timelinePanel);
+          }
         });
       });
 

@@ -3,9 +3,15 @@
   const STAFF_DASHBOARD_PATH = "/staff/dashboard/";
   const ROLE_ORDER = {
     guest: 0,
-    employee: 1,
-    manager: 2,
+    trainee: 1,
+    employee: 2,
+    team_lead: 3,
+    manager: 4,
+    admin: 5,
+    owner: 6,
   };
+
+  let cachedSupabaseClient = null;
 
   function roleValue(role) {
     return ROLE_ORDER[role] || 0;
@@ -28,14 +34,9 @@
   }
 
   function normalizeRole(rawRole) {
-    if (rawRole === "guest") {
-      return "guest";
-    }
-    if (rawRole === "manager") {
-      return "manager";
-    }
-    if (rawRole === "employee") {
-      return "employee";
+    const role = String(rawRole || "").toLowerCase();
+    if (role in ROLE_ORDER) {
+      return role;
     }
     return "guest";
   }
@@ -54,11 +55,12 @@
       return null;
     }
 
-    const client = window.supabase.createClient(config.url, config.anonKey, {
+    const client = cachedSupabaseClient || window.supabase.createClient(config.url, config.anonKey, {
       auth: {
         persistSession: config.persistSession !== false,
       },
     });
+    cachedSupabaseClient = client;
 
     return {
       async signIn(email, password, remember) {
@@ -94,6 +96,7 @@
           user,
           email: user.email || "",
           role: inferRoleFromUser(user, window.STAFF_PORTAL_CONFIG?.defaultRole || "guest"),
+          displayName: user.user_metadata?.full_name || user.user_metadata?.name || "",
           expiresAt: data.session.expires_at || null,
           provider: "supabase",
         };
@@ -108,6 +111,7 @@
                   user,
                   email: user.email || "",
                   role: inferRoleFromUser(user, window.STAFF_PORTAL_CONFIG?.defaultRole || "guest"),
+                  displayName: user.user_metadata?.full_name || user.user_metadata?.name || "",
                   expiresAt: session.expires_at || null,
                   provider: "supabase",
                 }
@@ -226,9 +230,30 @@
     return adapter;
   }
 
+  async function getSupabaseClient() {
+    const cfg = window.STAFF_PORTAL_CONFIG || {};
+    if (cfg.authProvider !== "supabase") {
+      return null;
+    }
+    if (!window.supabase || !cfg.supabase?.url || !cfg.supabase?.anonKey) {
+      return null;
+    }
+    if (!cachedSupabaseClient) {
+      cachedSupabaseClient = window.supabase.createClient(cfg.supabase.url, cfg.supabase.anonKey, {
+        auth: {
+          persistSession: cfg.supabase.persistSession !== false,
+        },
+      });
+    }
+    return cachedSupabaseClient;
+  }
+
   window.StaffAuth = {
     createAuthClient,
     canAccessRole,
+    normalizeRole,
+    roleValue,
+    getSupabaseClient,
     getBasePath,
     loginPath,
     dashboardPath,

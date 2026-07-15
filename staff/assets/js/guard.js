@@ -1,29 +1,5 @@
 (function () {
   const auth = window.StaffAuth.createAuthClient();
-  const ADMIN_OVERRIDE_STORAGE_KEY = window.STAFF_PORTAL_CONFIG?.adminOverrideStorageKey || "staff_admin_override";
-
-  function getAdminOverrideSession() {
-    // Placeholder: replace client-side override with server-verified token/session checks.
-    try {
-      const raw = sessionStorage.getItem(ADMIN_OVERRIDE_STORAGE_KEY);
-      if (!raw) {
-        return null;
-      }
-      const parsed = JSON.parse(raw);
-      if (!parsed?.enabled) {
-        return null;
-      }
-      const employeeName = parsed.employeeName || "Staff";
-      return {
-        email: parsed.email || `${employeeName.toLowerCase()}@scrubclub801.us`,
-        role: parsed.role || "manager",
-        name: employeeName,
-        provider: "admin-override",
-      };
-    } catch (_err) {
-      return null;
-    }
-  }
 
   function safeNextPath() {
     if (window.location.pathname.startsWith("/staff/")) {
@@ -34,7 +10,7 @@
 
   async function enforceAccess() {
     const requiredRole = document.body.dataset.requiredRole || "employee";
-    const session = (await auth.getSession()) || getAdminOverrideSession();
+    const session = await auth.getSession();
 
     if (!session) {
       const next = encodeURIComponent(safeNextPath());
@@ -61,8 +37,8 @@
 
     document.body.dataset.currentRole = session.role;
     document.body.dataset.currentEmail = session.email;
-    if (session.name) {
-      document.body.dataset.currentName = session.name;
+    if (session.displayName) {
+      document.body.dataset.currentName = session.displayName;
     }
 
     const roleNodes = document.querySelectorAll("[data-role-display]");
@@ -78,7 +54,7 @@
 
   function subscribeSessionExpiry() {
     auth.onAuthChange((session) => {
-      if (!session && !getAdminOverrideSession()) {
+      if (!session) {
         const next = encodeURIComponent(safeNextPath());
         window.location.replace(`${window.StaffAuth.loginPath()}?next=${next}`);
       }

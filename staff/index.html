@@ -42,52 +42,10 @@
         </div>
 
         <button class="staff-button" type="submit">Sign In</button>
-        <button class="staff-access-link" type="button" data-open-admin-modal>Staff Access</button>
         <p class="staff-message" data-login-message role="status" aria-live="polite"></p>
       </form>
     </section>
   </main>
-
-  <div class="staff-admin-modal" data-admin-modal hidden>
-    <div class="staff-admin-backdrop" data-close-admin-modal></div>
-    <section
-      class="staff-admin-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="staff-admin-title"
-      aria-describedby="staff-admin-description"
-    >
-      <div data-admin-form-view>
-        <h2 id="staff-admin-title">Staff Access</h2>
-        <p class="staff-admin-description" id="staff-admin-description">Employee Name</p>
-
-        <form class="staff-admin-form" data-admin-form novalidate>
-          <label for="staffAccessEmployee">Employee Name</label>
-          <select id="staffAccessEmployee" name="staffAccessEmployee" required>
-            <option value="Nella">Nella</option>
-            <option value="Baylee">Baylee</option>
-          </select>
-
-          <label for="staffAccessPin">Access PIN</label>
-          <input id="staffAccessPin" name="staffAccessPin" type="password" autocomplete="off" required />
-          <p class="staff-message" data-admin-message role="status" aria-live="polite"></p>
-
-          <div class="staff-admin-actions">
-            <button class="staff-admin-cancel" type="button" data-close-admin-modal>Cancel</button>
-            <button class="staff-button" type="submit">Unlock</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="staff-welcome" data-admin-welcome-view hidden>
-        <div class="staff-confetti" data-confetti aria-hidden="true"></div>
-        <p class="staff-welcome-tone" data-welcome-tone>Good evening</p>
-        <h3 class="staff-welcome-title">Welcome back, <span data-welcome-name>Staff</span>.</h3>
-        <p class="staff-welcome-date" data-welcome-date></p>
-        <p class="staff-welcome-time" data-welcome-time></p>
-      </div>
-    </section>
-  </div>
 
   <script src="/staff/assets/js/config.js"></script>
   <script src="/staff/assets/js/auth.js"></script>
@@ -96,42 +54,6 @@
     if (window.StaffLogin && typeof window.StaffLogin.init === "function") {
       window.StaffLogin.init();
     }
-
-    // Fallback modal wiring so Staff Access can still open if the main init path fails.
-    (function () {
-      const openButton = document.querySelector("[data-open-admin-modal]");
-      const modal = document.querySelector("[data-admin-modal]");
-      const closeButtons = document.querySelectorAll("[data-close-admin-modal]");
-      const pinInput = document.getElementById("staffAccessPin");
-
-      if (!openButton || !modal || openButton.dataset.fallbackBound === "true") {
-        return;
-      }
-
-      openButton.dataset.fallbackBound = "true";
-
-      const openModal = () => {
-        modal.hidden = false;
-        document.body.style.overflow = "hidden";
-        if (pinInput) {
-          window.requestAnimationFrame(() => pinInput.focus());
-        }
-      };
-
-      const closeModal = () => {
-        modal.hidden = true;
-        document.body.style.overflow = "";
-      };
-
-      openButton.addEventListener("click", openModal);
-      closeButtons.forEach((button) => button.addEventListener("click", closeModal));
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !modal.hidden) {
-          closeModal();
-        }
-      });
-    })();
   </script>
 </body>
 </html>

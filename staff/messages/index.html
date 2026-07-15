@@ -14,7 +14,7 @@
   />
   <link rel="stylesheet" href="/staff/assets/css/staff.css" />
 </head>
-<body data-required-role="employee">
+<body data-required-role="trainee">
   <div class="staff-shell">
     <header class="staff-top">
       <div class="staff-top-row">
@@ -36,11 +36,11 @@
         <div class="staff-page-head">
           <div>
             <h1 class="staff-title">Messages</h1>
-            <p class="staff-subtitle">Customer inbox for appointment updates, quote questions, and service follow-ups.</p>
+            <p class="staff-subtitle">Private staff channels for operations updates and team communication.</p>
           </div>
           <div class="staff-quick-actions">
-            <button class="staff-button" type="button">New Message</button>
-            <button class="staff-admin-cancel" type="button" data-nav-target="customers">Open Client List</button>
+            <button class="staff-button" type="button" data-nav-target="notificationSettings">Notification Settings</button>
+            <button class="staff-admin-cancel" type="button" data-nav-target="dashboard">Back to Dashboard</button>
           </div>
         </div>
 
@@ -48,44 +48,21 @@
           <article class="staff-kpi-card">
             <p class="staff-kpi-label">Unread</p>
             <p class="staff-kpi-value">0</p>
-            <p class="staff-kpi-trend">No unread messages are recorded</p>
+            <p class="staff-kpi-trend">Unread totals appear when real team messages are saved.</p>
           </article>
           <article class="staff-kpi-card">
-            <p class="staff-kpi-label">Responded Today</p>
+            <p class="staff-kpi-label">Moderation Actions</p>
             <p class="staff-kpi-value">0</p>
-            <p class="staff-kpi-trend">Response metrics update from saved threads</p>
+            <p class="staff-kpi-trend">Changes are tracked in audit logs when enabled.</p>
           </article>
           <article class="staff-kpi-card">
-            <p class="staff-kpi-label">Follow-Ups Due</p>
+            <p class="staff-kpi-label">Escalations</p>
             <p class="staff-kpi-value">0</p>
-            <p class="staff-kpi-trend">Follow-ups appear when notes require action</p>
+            <p class="staff-kpi-trend">Escalation count updates from saved channel actions.</p>
           </article>
         </div>
 
-        <div class="staff-empty-state">
-          <h3>No client messages are available yet.</h3>
-          <p>Message records will appear here after an appointment or quote thread is created.</p>
-        </div>
-
-        <div class="staff-layout-split">
-          <article class="staff-card staff-panel">
-            <div class="staff-panel-head">
-              <h2 class="staff-section-title">Priority Queue</h2>
-            </div>
-            <div class="staff-empty-state small">
-              <p>No priority responses are currently due.</p>
-            </div>
-          </article>
-
-          <article class="staff-card staff-panel">
-            <div class="staff-panel-head">
-              <h2 class="staff-section-title">Team Availability</h2>
-            </div>
-            <div class="staff-empty-state small">
-              <p>Availability updates will display when staff schedules are saved.</p>
-            </div>
-          </article>
-        </div>
+        <div data-employee-messages-root></div>
       </section>
     </main>
   </div>
@@ -93,10 +70,16 @@
   <script src="/staff/assets/js/config.js"></script>
   <script src="/staff/assets/js/auth.js"></script>
   <script src="/staff/assets/js/training.js"></script>
+  <script src="/staff/assets/js/staff-db.js"></script>
+  <script src="/staff/assets/js/staff-messaging.js"></script>
   <script src="/staff/assets/js/guard.js"></script>
   <script src="/staff/assets/js/portal.js"></script>
   <script>
-    window.StaffPortal.initProtectedPage();
+    window.StaffPortal.initProtectedPage().then(() => {
+      if (window.StaffMessaging) {
+        window.StaffMessaging.initMessagesPage();
+      }
+    });
   </script>
 </body>
 </html>

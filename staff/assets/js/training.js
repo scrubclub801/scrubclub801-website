@@ -604,6 +604,12 @@
           return next;
         });
         renderTrainingPage(session);
+        window.setTimeout(() => {
+          const nextIncomplete = document.querySelector('[data-complete-module]:not([data-complete-module="' + moduleId + '"])');
+          if (nextIncomplete && window.StaffPortal?.scrollToElement) {
+            window.StaffPortal.scrollToElement(nextIncomplete.closest(".training-module") || nextIncomplete, { focus: true });
+          }
+        }, 120);
       });
     });
 
@@ -636,6 +642,10 @@
 
         window.setTimeout(() => {
           renderTrainingPage(session);
+          const target = document.querySelector(".training-certificate") || document.querySelector(".training-quiz-card");
+          if (target && window.StaffPortal?.scrollToElement) {
+            window.StaffPortal.scrollToElement(target);
+          }
         }, 300);
       });
     }

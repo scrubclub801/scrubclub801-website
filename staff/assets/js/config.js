@@ -1,11 +1,31 @@
 window.STAFF_PORTAL_CONFIG = {
   appName: "Scrub Club 801 Staff Portal",
-  defaultRole: "guest",
-  adminOverrideStorageKey: "staff_admin_override",
+  defaultRole: "employee",
   authProvider: "supabase", // "supabase" | "firebase"
-  secureDataConnected: false,
+  secureDataConnected: true,
   aiSummariesEnabled: false,
   inactivityDaysThreshold: 45,
+  allowPublicSignup: false,
+
+  roles: {
+    owner: "owner",
+    admin: "admin",
+    manager: "manager",
+    teamLead: "team_lead",
+    employee: "employee",
+    trainee: "trainee",
+    guest: "guest",
+  },
+
+  push: {
+    enabled: false,
+    vapidPublicKey: "",
+  },
+
+  ai: {
+    enabled: false,
+    endpoint: "",
+  },
 
   // Supabase settings
   supabase: {

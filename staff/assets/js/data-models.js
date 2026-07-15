@@ -269,7 +269,10 @@
   }
 
   function canViewRecord(session, assignedEmployeeEmail) {
-    if (!session || session.role === "manager") {
+    if (
+      !session ||
+      window.StaffAuth.canAccessRole(session.role, "manager")
+    ) {
       return true;
     }
     if (!assignedEmployeeEmail) {
@@ -454,7 +457,7 @@
   }
 
   function updateClientFrequency(clientId, frequency, session) {
-    if (!session || !window.StaffAuth.canAccessRole(session.role, "employee")) {
+    if (!session || !window.StaffAuth.canAccessRole(session.role, "team_lead")) {
       return;
     }
 

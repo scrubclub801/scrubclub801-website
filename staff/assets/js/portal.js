@@ -1,18 +1,19 @@
 (function () {
-  const ADMIN_OVERRIDE_STORAGE_KEY = window.STAFF_PORTAL_CONFIG?.adminOverrideStorageKey || "staff_admin_override";
   const NAV_ITEMS = [
-    { label: "Dashboard", href: "/staff/dashboard/", role: "employee", icon: "dashboard" },
+    { label: "Dashboard", href: "/staff/dashboard/", role: "trainee", icon: "dashboard" },
     { label: "Appointments", href: "/staff/appointments/", role: "employee", icon: "calendar" },
     { label: "Quotes", href: "/staff/quotes/", role: "employee", icon: "quotes" },
     { label: "Clients", href: "/staff/customers/", role: "employee", icon: "customers" },
     { label: "Payments", href: "/staff/payments/", role: "employee", icon: "payments" },
     { label: "Customer Health", href: "/staff/customer-health/", role: "employee", icon: "health" },
-    { label: "Employees", href: "/staff/employees/", role: "employee", icon: "employees" },
-    { label: "Training Center", href: "/staff/training/", role: "employee", icon: "training" },
+    { label: "Employees", href: "/staff/employees/", role: "team_lead", icon: "employees" },
+    { label: "Training Center", href: "/staff/training/", role: "trainee", icon: "training" },
     { label: "Inventory", href: "/staff/inventory/", role: "employee", icon: "inventory" },
-    { label: "Messages", href: "/staff/messages/", role: "employee", icon: "messages" },
+    { label: "Messages", href: "/staff/messages/", role: "trainee", icon: "messages" },
+    { label: "Notification Settings", href: "/staff/notification-settings/", role: "trainee", icon: "messages" },
+    { label: "Audit Log", href: "/staff/audit-log/", role: "admin", icon: "analytics" },
     { label: "Analytics", href: "/staff/analytics/", role: "manager", icon: "analytics" },
-    { label: "Settings", href: "/staff/settings/", role: "manager", icon: "settings" },
+    { label: "Settings", href: "/staff/settings/", role: "admin", icon: "settings" },
   ];
 
   const ACTION_TARGETS = {
@@ -20,6 +21,8 @@
     training: "/staff/training/",
     inventory: "/staff/inventory/",
     messages: "/staff/messages/",
+    notificationSettings: "/staff/notification-settings/",
+    auditLog: "/staff/audit-log/",
     quotes: "/staff/quotes/",
     appointments: "/staff/appointments/",
     customers: "/staff/customers/",
@@ -78,11 +81,177 @@
     if (!href || !href.startsWith("/staff/")) {
       return;
     }
+    try {
+      sessionStorage.setItem("staff-scroll-top-on-load", "1");
+    } catch (_err) {
+      // Ignore storage failures.
+    }
     window.location.assign(href);
+  }
+
+  function prefersReducedMotion() {
+    try {
+      return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (_err) {
+      return false;
+    }
+  }
+
+  function headerOffset() {
+    const header = document.querySelector(".staff-top");
+    if (!header) {
+      return 16;
+    }
+    return Math.max(16, header.getBoundingClientRect().height + 10);
+  }
+
+  function isFullyVisible(node) {
+    if (!node) {
+      return false;
+    }
+    const rect = node.getBoundingClientRect();
+    const top = headerOffset();
+    const bottom = window.innerHeight;
+    return rect.top >= top && rect.bottom <= bottom;
+  }
+
+  function scrollToElement(node, options) {
+    if (!node) {
+      return;
+    }
+
+    if (isFullyVisible(node)) {
+      if (options?.focus) {
+        node.focus({ preventScroll: true });
+      }
+      return;
+    }
+
+    const reduceMotion = prefersReducedMotion();
+    const top = window.scrollY + node.getBoundingClientRect().top - headerOffset();
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+
+    if (options?.focus) {
+      window.setTimeout(() => {
+        node.focus({ preventScroll: true });
+      }, reduceMotion ? 0 : 240);
+    }
+  }
+
+  function restoreTopScrollIfRequested() {
+    let shouldScrollTop = false;
+    try {
+      shouldScrollTop = sessionStorage.getItem("staff-scroll-top-on-load") === "1";
+      if (shouldScrollTop) {
+        sessionStorage.removeItem("staff-scroll-top-on-load");
+      }
+    } catch (_err) {
+      shouldScrollTop = false;
+    }
+
+    if (!shouldScrollTop) {
+      return;
+    }
+
+    const reduceMotion = prefersReducedMotion();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
+  function scrollToSection(sectionKey) {
+    if (!sectionKey) {
+      return false;
+    }
+    const node = document.querySelector(`[data-section-key="${sectionKey}"]`);
+    if (!node) {
+      return false;
+    }
+    scrollToElement(node);
+    return true;
+  }
+
+  function canUseEmployeePortalEnhancements() {
+    const role = document.body.dataset.currentRole || "guest";
+    return window.StaffAuth.canAccessRole(role, "employee");
+  }
+
+  function setupBackToTopButton() {
+    if (!canUseEmployeePortalEnhancements()) {
+      return;
+    }
+
+    if (document.querySelector("[data-back-to-top]")) {
+      return;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "staff-back-to-top";
+    button.setAttribute("data-back-to-top", "true");
+    button.setAttribute("aria-label", "Scroll to top");
+    button.textContent = "Back to Top";
+    document.body.appendChild(button);
+
+    button.classList.add("visible");
+
+    button.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  function setupAssistant() {
+    const role = document.body.dataset.currentRole || "guest";
+    if (!window.StaffAuth.canAccessRole(role, "employee")) {
+      return;
+    }
+
+    const startAssistant = () => {
+      if (window.StaffAssistant && typeof window.StaffAssistant.init === "function") {
+        window.StaffAssistant.init();
+      }
+    };
+
+    if (window.StaffAssistant) {
+      startAssistant();
+      return;
+    }
+
+    if (document.querySelector('script[data-assistant-script="true"]')) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "/staff/assets/js/ai-assistant.js";
+    script.defer = true;
+    script.setAttribute("data-assistant-script", "true");
+    script.addEventListener("load", startAssistant);
+    document.head.appendChild(script);
   }
 
   function setupRouteActions() {
     const currentRole = document.body.dataset.currentRole || "employee";
+
+    document.querySelectorAll("[data-scroll-target]").forEach((node) => {
+      const jumpToTarget = (event) => {
+        const sectionKey = node.getAttribute("data-scroll-target");
+        if (!sectionKey) {
+          return;
+        }
+        if (!scrollToSection(sectionKey)) {
+          return;
+        }
+        event.preventDefault();
+      };
+
+      node.addEventListener("click", jumpToTarget);
+      node.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          jumpToTarget(event);
+        }
+      });
+    });
 
     document.querySelectorAll("[data-nav-target]").forEach((node) => {
       const requiredRole = node.getAttribute("data-required-role");
@@ -93,6 +262,10 @@
 
       const navigateToTarget = (event) => {
         const targetKey = node.getAttribute("data-nav-target");
+        if (scrollToSection(targetKey)) {
+          event.preventDefault();
+          return;
+        }
         const href = ACTION_TARGETS[targetKey];
         if (!href) {
           return;
@@ -139,7 +312,6 @@
 
     signOut.addEventListener("click", async (event) => {
       event.preventDefault();
-      sessionStorage.removeItem(ADMIN_OVERRIDE_STORAGE_KEY);
       try {
         await window.StaffGuard.auth.signOut();
       } catch (_err) {
@@ -159,7 +331,7 @@
     const email = document.body.dataset.currentEmail || "";
     const name = document.body.dataset.currentName || "";
     const status = window.StaffTraining.getProgressForUser({ role, email, name });
-    const label = status.complete ? "Training Complete" : "Training Required";
+    const label = status.complete ? "Training Complete" : status.progressPercent > 0 ? "Training In Progress" : "Training Not Started";
 
     statusNodes.forEach((node) => {
       node.textContent = label;
@@ -172,12 +344,18 @@
     await window.StaffGuard.enforceAccess();
     window.StaffGuard.subscribeSessionExpiry();
     buildSidebar(document.body.dataset.currentRole || "employee");
+    restoreTopScrollIfRequested();
     setupRouteActions();
+    setupBackToTopButton();
     updateTrainingStatusChip();
     setupSignOut();
+    setupAssistant();
   }
 
   window.StaffPortal = {
     initProtectedPage,
+    scrollToElement,
+    isFullyVisible,
+    prefersReducedMotion,
   };
 })();
