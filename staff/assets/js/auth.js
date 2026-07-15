@@ -1,6 +1,24 @@
 (function () {
   const STAFF_BASE_PATH = "/staff/";
   const STAFF_DASHBOARD_PATH = "/staff/dashboard/";
+  const LOCAL_SESSION_KEY = "staff_local_access_session_v1";
+  const STAFF_ACCESS_ACCOUNTS = {
+    nella_maglic: {
+      id: "nella_maglic",
+      name: "Nella Maglic",
+      email: "nellamaglic@gmail.com",
+      role: "admin",
+      pin: "2008",
+    },
+    baylee_ellis: {
+      id: "baylee_ellis",
+      name: "Baylee Ellis",
+      email: "baylee.ellis@local.staff",
+      role: "manager",
+      pin: "2007",
+    },
+  };
+
   const ROLE_ORDER = {
     guest: 0,
     trainee: 1,
@@ -38,6 +56,9 @@
     if (role in ROLE_ORDER) {
       return role;
     }
+    if (role === "owner/admin" || role === "owner_admin") {
+      return "admin";
+    }
     return "guest";
   }
 
@@ -47,7 +68,55 @@
   }
 
   function missingProviderError() {
-    return new Error("Secure sign-in service is temporarily unavailable. Contact the portal administrator.");
+    return new Error("Secure email login has not been connected yet. Use Staff Access for local testing or complete the Supabase setup.");
+  }
+
+  function secureEmailConnected() {
+    const cfg = window.STAFF_PORTAL_CONFIG || {};
+    return Boolean(cfg.authProvider === "supabase" && cfg.supabase?.url && cfg.supabase?.anonKey && window.supabase);
+  }
+
+  function setLocalSession(account) {
+    const session = {
+      provider: "local_staff_access",
+      id: account.id,
+      email: account.email,
+      displayName: account.name,
+      role: normalizeRole(account.role),
+      issuedAt: Date.now(),
+    };
+    window.sessionStorage.setItem(LOCAL_SESSION_KEY, JSON.stringify(session));
+    return session;
+  }
+
+  function getLocalSession() {
+    try {
+      const raw = window.sessionStorage.getItem(LOCAL_SESSION_KEY);
+      if (!raw) {
+        return null;
+      }
+      const parsed = JSON.parse(raw);
+      if (!parsed?.email || !parsed?.role) {
+        return null;
+      }
+      return {
+        provider: "local_staff_access",
+        email: parsed.email,
+        displayName: parsed.displayName || "Staff",
+        role: normalizeRole(parsed.role),
+        issuedAt: parsed.issuedAt || Date.now(),
+      };
+    } catch (_err) {
+      return null;
+    }
+  }
+
+  function clearLocalSession() {
+    try {
+      window.sessionStorage.removeItem(LOCAL_SESSION_KEY);
+    } catch (_err) {
+      // Ignore.
+    }
   }
 
   function supabaseAdapter(config) {
@@ -70,7 +139,6 @@
         }
 
         if (!remember) {
-          await client.auth.setSession(data.session);
           window.sessionStorage.setItem("staff-temporary-session", "1");
         }
 
@@ -206,28 +274,75 @@
       adapter = supabaseAdapter(cfg.supabase || {});
     }
 
-    if (!adapter) {
-      return {
-        async signIn() {
+    return {
+      async signIn(email, password, remember) {
+        clearLocalSession();
+        if (!adapter) {
           throw missingProviderError();
-        },
-        async signOut() {
-          throw missingProviderError();
-        },
-        async getSession() {
+        }
+        return adapter.signIn(email, password, remember);
+      },
+      async signInWithStaffAccess(employeeId, pin) {
+        const account = STAFF_ACCESS_ACCOUNTS[String(employeeId || "")];
+        if (!account || String(pin || "") !== account.pin) {
+          throw new Error("Invalid employee credentials.");
+        }
+        return setLocalSession(account);
+      },
+      async signOut() {
+        clearLocalSession();
+        if (adapter) {
+          await adapter.signOut();
+        }
+      },
+      async getSession() {
+        const local = getLocalSession();
+        if (local) {
+          return local;
+        }
+        if (!adapter) {
           return null;
-        },
-        onAuthChange(callback) {
-          callback(null);
-          return { data: { subscription: { unsubscribe() {} } } };
-        },
-        async sendPasswordReset() {
+        }
+        return adapter.getSession();
+      },
+      onAuthChange(callback) {
+        if (adapter) {
+          return adapter.onAuthChange((session) => {
+            const local = getLocalSession();
+            if (local) {
+              callback(local);
+              return;
+            }
+            callback(session);
+          });
+        }
+        return { data: { subscription: { unsubscribe() {} } } };
+      },
+      async sendPasswordReset(email) {
+        if (!adapter) {
           throw missingProviderError();
-        },
-      };
-    }
+        }
+        return adapter.sendPasswordReset(email);
+      },
+    };
+  }
 
-    return adapter;
+  async function fetchStaffProfileByEmail(email) {
+    const client = await getSupabaseClient();
+    if (!client || !email) {
+      return null;
+    }
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const { data, error } = await client
+      .from("employee_profiles")
+      .select("id, email, full_name, role, account_status")
+      .ilike("email", normalizedEmail)
+      .limit(1)
+      .maybeSingle();
+    if (error) {
+      return null;
+    }
+    return data || null;
   }
 
   async function getSupabaseClient() {
@@ -254,6 +369,8 @@
     normalizeRole,
     roleValue,
     getSupabaseClient,
+    fetchStaffProfileByEmail,
+    isSecureEmailLoginConnected: secureEmailConnected,
     getBasePath,
     loginPath,
     dashboardPath,

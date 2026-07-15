@@ -42,11 +42,46 @@
         </div>
 
         <button class="staff-button" type="submit">Sign In</button>
+        <button class="staff-access-link" type="button" data-open-staff-access>Staff Access</button>
         <p class="staff-message" data-login-message role="status" aria-live="polite"></p>
       </form>
+
+      <section class="staff-welcome" data-login-welcome hidden tabindex="-1" aria-live="polite">
+        <p class="staff-welcome-tone">Welcome</p>
+        <h2 class="staff-welcome-title" data-login-welcome-title>Signing in</h2>
+        <p class="staff-welcome-date" data-login-welcome-date></p>
+        <p class="staff-welcome-time" data-login-welcome-time></p>
+        <div class="staff-confetti" data-login-confetti></div>
+      </section>
     </section>
   </main>
 
+  <div class="staff-admin-modal" data-staff-access-modal hidden>
+    <button class="staff-admin-backdrop" type="button" data-close-staff-access aria-label="Close Staff Access"></button>
+    <section class="staff-admin-panel" role="dialog" aria-modal="true" aria-labelledby="staffAccessTitle">
+      <h2 id="staffAccessTitle">Staff Access</h2>
+      <p class="staff-admin-description">Temporary local development sign-in for approved staff profiles.</p>
+      <p class="staff-admin-description">Use code 2008 for Nella Maglic or 2007 for Baylee Ellis.</p>
+      <form class="staff-admin-form" id="staffAccessForm" novalidate>
+        <label for="staffAccessEmployee">Employee</label>
+        <select id="staffAccessEmployee" name="employee" required>
+          <option value="nella_maglic">Nella Maglic (Owner / Admin)</option>
+          <option value="baylee_ellis">Baylee Ellis (Manager)</option>
+        </select>
+
+        <label for="staffAccessPin">PIN</label>
+        <input id="staffAccessPin" name="pin" type="password" inputmode="numeric" autocomplete="off" required />
+
+        <div class="staff-admin-actions">
+          <button class="staff-admin-cancel" type="button" data-close-staff-access>Cancel</button>
+          <button class="staff-button" type="submit">Continue</button>
+        </div>
+        <p class="staff-message" data-staff-access-message role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/staff/assets/js/config.js"></script>
   <script src="/staff/assets/js/auth.js"></script>
   <script src="/staff/assets/js/login.js"></script>
