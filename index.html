@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrub Club 801 | Home Cleaning in Draper, Utah</title>
+  <meta name="description" content="Scrub Club 801 offers thoughtful home cleaning, deep cleaning, recurring cleaning, and move-in or move-out cleaning in Draper and surrounding Utah communities." />
+  <meta property="og:title" content="Scrub Club 801 | Home Cleaning in Draper, Utah" />
+  <meta property="og:description" content="Fresh, reliable home cleaning from a local business founded by two friends." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #0c2541;
+      --blue: #2778ff;
+      --blue-dark: #1657c9;
+      --ice: #eff8ff;
+      --aqua: #b8f0eb;
+      --mint: #dff9f4;
+      --white: #ffffff;
+      --gray: #64748b;
+      --line: rgba(12, 37, 65, 0.12);
+      --shadow: 0 25px 80px rgba(33, 103, 190, 0.16);
+      --radius: 28px;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 0.98;
+    }
+
+    h2 {
+      font-size: clamp(3rem, 7vw, 6.3rem);
+      letter-spacing: -0.045em;
+    }
+
+    p {
+      color: var(--gray);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 14px 35px rgba(39, 120, 255, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(12, 37, 65, 0.08);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      letter-spacing: -0.04em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .logo-mark {
+      width: 31px;
+      height: 31px;
+      border: 1.5px solid var(--blue);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 25px rgba(39,120,255,.25);
+    }
+
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: var(--aqua);
+    }
+
+    .logo-mark::before {
+      width: 9px;
+      height: 9px;
+      top: 4px;
+      right: 3px;
+    }
+
+    .logo-mark::after {
+      width: 5px;
+      height: 5px;
+      left: 6px;
+      bottom: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 145px 0 70px;
+      position: relative;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(184, 240, 235, 0.8), transparent 20%),
+        radial-gradient(circle at 66% 44%, rgba(39, 120, 255, 0.14), transparent 24%),
+        linear-gradient(180deg, #f7fcff 0%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -180px;
+      top: 120px;
+      border: 1px solid rgba(39,120,255,.18);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      left: 7%;
+      top: 25%;
+      border-radius: 50%;
+      background: rgba(184, 240, 235, 0.3);
+      border: 1px solid rgba(39,120,255,.18);
+      box-shadow: 0 0 60px rgba(39,120,255,.2);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 70px;
+      align-items: end;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: clamp(4.4rem, 10vw, 9.4rem);
+      letter-spacing: -0.065em;
+      max-width: 920px;
+      margin: 22px 0 28px;
+    }
+
+    .hero h1 em {
+      color: var(--blue);
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      max-width: 600px;
+      font-size: 1.12rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-side {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      align-self: end;
+    }
+
+    .hero-side strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .mini-stat {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .95rem;
+    }
+
+    .mini-stat span:last-child {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .trust-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .trust-grid div {
+      padding: 22px 18px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+      font-size: .84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .trust-grid div:last-child {
+      border-right: 0;
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 90px;
+      align-items: start;
+    }
+
+    .intro-copy {
+      max-width: 750px;
+    }
+
+    .intro-copy p {
+      font-size: 1.1rem;
+      max-width: 640px;
+      margin-top: 28px;
+    }
+
+    .signature {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2rem;
+      margin-top: 34px;
+      color: var(--navy);
+    }
+
+    .services {
+      background: var(--ice);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 65px;
+    }
+
+    .section-head p {
+      max-width: 430px;
+    }
+
+    .services-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      transition: .25s ease;
+    }
+
+    .service-row:hover {
+      padding-left: 12px;
+      color: var(--blue);
+    }
+
+    .service-number {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .service-row h3 {
+      font-family: var(--serif);
+      font-size: 2.25rem;
+    }
+
+    .service-row p {
+      font-size: .96rem;
+    }
+
+    .service-arrow {
+      font-size: 1.5rem;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .why-statement {
+      position: sticky;
+      top: 120px;
+    }
+
+    .reason-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .reason {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 20px;
+    }
+
+    .reason-index {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .reason h3 {
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .checklist-section {
+      background: var(--navy);
+      color: white;
+    }
+
+    .checklist-section p {
+      color: rgba(255,255,255,.68);
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 55px;
+      border-top: 1px solid rgba(255,255,255,.14);
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+
+    .check-item {
+      padding: 32px 22px;
+      border-right: 1px solid rgba(255,255,255,.14);
+      min-height: 220px;
+    }
+
+    .check-item:last-child {
+      border-right: 0;
+    }
+
+    .check-item span {
+      color: var(--aqua);
+      font-size: 1.4rem;
+    }
+
+    .check-item h3 {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 18px 0 14px;
+    }
+
+    .check-item ul {
+      list-style: none;
+      color: rgba(255,255,255,.68);
+      font-size: .9rem;
+    }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .area-cloud {
+      position: relative;
+      min-height: 520px;
+      background:
+        radial-gradient(circle at center, rgba(39,120,255,.16), transparent 44%),
+        var(--ice);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(39,120,255,.12);
+    }
+
+    .area-core {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(39,120,255,.35);
+      position: relative;
+      z-index: 2;
+      font-weight: 700;
+    }
+
+    .area-tag {
+      position: absolute;
+      padding: 9px 13px;
+      border: 1px solid rgba(39,120,255,.18);
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      font-size: .84rem;
+      box-shadow: 0 12px 25px rgba(12,37,65,.08);
+    }
+
+    .area-tag:nth-child(2){top: 8%; left: 34%;}
+    .area-tag:nth-child(3){top: 18%; right: 6%;}
+    .area-tag:nth-child(4){top: 42%; right: -2%;}
+    .area-tag:nth-child(5){bottom: 17%; right: 8%;}
+    .area-tag:nth-child(6){bottom: 5%; left: 35%;}
+    .area-tag:nth-child(7){bottom: 18%; left: 3%;}
+    .area-tag:nth-child(8){top: 42%; left: -2%;}
+    .area-tag:nth-child(9){top: 18%; left: 8%;}
+
+    .area-list {
+      columns: 2;
+      list-style: none;
+      margin: 30px 0;
+      gap: 40px;
+    }
+
+    .area-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      break-inside: avoid;
+    }
+
+    .faq {
+      background: #f8fbfd;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 80px;
+    }
+
+    .accordion {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      padding: 23px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 0 24px;
+      max-width: 680px;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .quote-section {
+      background:
+        radial-gradient(circle at 90% 10%, rgba(184,240,235,.85), transparent 24%),
+        linear-gradient(180deg, #eff8ff, white);
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .quote-card {
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(39,120,255,.12);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 34px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: var(--navy);
+      background: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(39,120,255,.1);
+    }
+
+    textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: .82rem;
+      margin: 14px 0 18px;
+    }
+
+    .success {
+      display: none;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--mint);
+      color: var(--navy);
+      margin-top: 16px;
+      font-weight: 700;
+    }
+
+    .closing {
+      text-align: center;
+      background: var(--blue);
+      color: white;
+      padding: 110px 0;
+    }
+
+    .closing p {
+      color: rgba(255,255,255,.78);
+      max-width: 600px;
+      margin: 24px auto 30px;
+    }
+
+    .closing .btn-primary {
+      background: white;
+      color: var(--blue);
+      box-shadow: none;
+    }
+
+    footer {
+      padding: 65px 0 35px;
+      background: #071a2e;
+      color: white;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 50px;
+    }
+
+    footer p,
+    footer a {
+      color: rgba(255,255,255,.62);
+      font-size: .9rem;
+    }
+
+    .footer-title {
+      color: white;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.12);
+      margin-top: 45px;
+      padding-top: 22px;
+      color: rgba(255,255,255,.45);
+      font-size: .8rem;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        inset: 78px 0 auto 0;
+        display: none;
+        padding: 24px;
+        flex-direction: column;
+        align-items: stretch;
+        background: white;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero-grid,
+      .intro-grid,
+      .why-grid,
+      .areas-grid,
+      .faq-grid,
+      .quote-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .hero-side,
+      .why-statement {
+        position: static;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .trust-grid div {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .service-row {
+        grid-template-columns: 45px 1fr auto;
+      }
+
+      .service-row p {
+        grid-column: 2 / -1;
+      }
+
+      .checklist-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .check-item {
+        border-bottom: 1px solid rgba(255,255,255,.14);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 125px;
+      }
+
+      .hero h1 {
+        font-size: 4.15rem;
+      }
+
+      section {
+        padding: 85px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 20px;
+      }
+
+      .trust-grid,
+      .checklist-grid,
+      .form-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-grid div,
+      .check-item {
+        border-right: 0;
+      }
+
+      .service-row {
+        grid-template-columns: 36px 1fr auto;
+        gap: 12px;
+      }
+
+      .service-row h3 {
+        font-size: 1.75rem;
+      }
+
+      .area-cloud {
+        min-height: 390px;
+      }
+
+      .area-tag {
+        font-size: .7rem;
+        padding: 7px 9px;
+      }
+
+      .area-list {
+        columns: 1;
+      }
+
+      .quote-card {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="logo" aria-label="Scrub Club 801 home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Scrub Club 801
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#areas">Areas</a>
+        <a href="#faq">FAQs</a>
+        <a href="#quote">Get a Quote</a>
+        <a href="#quote" class="btn btn-primary">Book Now</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Utah’s freshest cleaning club</span>
+          <h1>A cleaner home, <em>without giving up your day.</em></h1>
+          <p class="hero-copy">
+            Scrub Club 801 provides thoughtful, reliable home cleaning throughout Draper and nearby Utah communities. Created by two friends who believe a clean home should feel calm, comfortable, and completely refreshed.
+          </p>
+          <div class="hero-actions">
+            <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+            <a href="#services" class="btn btn-secondary">Explore Our Services</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <strong>Locally owned by two friends</strong>
+          <p>Personal service, clear communication, and details that make your whole home feel better.</p>
+          <div class="mini-stat"><span>Based in</span><span>Draper, UT</span></div>
+          <div class="mini-stat"><span>Service radius</span><span>About 35 min</span></div>
+          <div class="mini-stat"><span>Quotes</span><span>Personalized</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div>Locally owned</div>
+        <div>Detail focused</div>
+        <div>Flexible scheduling</div>
+        <div>Personalized quotes</div>
+        <div>Reliable communication</div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container intro-grid">
+        <div>
+          <span class="eyebrow">About Scrub Club</span>
+        </div>
+        <div class="intro-copy">
+          <h2>Cleaning your space like it’s our own.</h2>
+          <p>
+            Scrub Club 801 was created by Nella and Baylee to make local home cleaning feel more personal, organized, and dependable. We focus on what matters most to each client, from everyday upkeep to the details that are easy to miss.
+          </p>
+          <p>
+            Our approach is simple: listen carefully, communicate clearly, respect every home, and leave each space feeling lighter than we found it.
+          </p>
+          <div class="signature">Nella + Baylee</div>
+          <p>Two friends, one shared obsession with a truly clean space.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">What we clean</span>
+            <h2>Services made for real life.</h2>
+          </div>
+          <p>Every home is different. We create a personalized quote based on your space, schedule, and priorities.</p>
+        </div>
+
+        <div class="services-list">
+          <div class="service-row"><span class="service-number">01</span><h3>Standard Home Cleaning</h3><p>Reliable upkeep for kitchens, bathrooms, bedrooms, and living spaces.</p><span class="service-arrow">↗</span></div>
+          <div class="service-row"><span class="service-number">02</span><h3>Deep Cleaning</h3><p>Extra attention for buildup, overlooked areas, and homes that need a reset.</p><span class="service-arrow">↗</span></div>
+          <div class="service-row"><span class="service-number">03</span><h3>Move-In Cleaning</h3><p>Start fresh with a clean, comfortable space before unpacking.</p><span class="service-arrow">↗</span></div>
+          <div class="service-row"><span class="service-number">04</span><h3>Move-Out Cleaning</h3><p>Leave your previous home looking clean, polished, and ready for what is next.</p><span class="service-arrow">↗</span></div>
+          <div class="service-row"><span class="service-number">05</span><h3>Recurring Cleaning</h3><p>Weekly, biweekly, or monthly options based on availability.</p><span class="service-arrow">↗</span></div>
+          <div class="service-row"><span class="service-number">06</span><h3>Custom Requests</h3><p>Tell us what needs attention and we will build it into your quote when possible.</p><span class="service-arrow">↗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container why-grid">
+        <div class="why-statement">
+          <span class="eyebrow">Why choose us</span>
+          <h2>More personal than a chain. More dependable than doing it yourself.</h2>
+        </div>
+        <div class="reason-list">
+          <div class="reason">
+            <div class="reason-index">01</div>
+            <div><h3>A local two-person business</h3><p>You know exactly who you are working with and who is caring for your home.</p></div>
+          </div>
+          <div class="reason">
+            <div class="reason-index">02</div>
+            <div><h3>Cleaning plans based on your needs</h3><p>We focus on the rooms, surfaces, and details that matter most to you.</p></div>
+          </div>
+          <div class="reason">
+            <div class="reason-index">03</div>
+            <div><h3>Attention to overlooked details</h3><p>Our goal is not just to tidy up, but to leave your space feeling noticeably refreshed.</p></div>
+          </div>
+          <div class="reason">
+            <div class="reason-index">04</div>
+            <div><h3>Simple communication</h3><p>Clear quotes, straightforward scheduling, and no confusing corporate process.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="checklist-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow" style="color: var(--aqua)">A cleaner look at the details</span>
+            <h2>Room by room.</h2>
+          </div>
+          <p>Your final checklist depends on the service selected and your personalized quote.</p>
+        </div>
+
+        <div class="checklist-grid">
+          <div class="check-item"><span>✦</span><h3>Kitchen</h3><ul><li>Counters</li><li>Sink area</li><li>Appliance exteriors</li><li>Floors</li></ul></div>
+          <div class="check-item"><span>✦</span><h3>Bathrooms</h3><ul><li>Mirrors</li><li>Vanity</li><li>Shower or tub</li><li>Fixtures</li></ul></div>
+          <div class="check-item"><span>✦</span><h3>Bedrooms</h3><ul><li>Surface dusting</li><li>Vacuuming</li><li>Floor care</li><li>General reset</li></ul></div>
+          <div class="check-item"><span>✦</span><h3>Living Spaces</h3><ul><li>Common surfaces</li><li>Furniture areas</li><li>Floors</li><li>Finishing touches</li></ul></div>
+          <div class="check-item"><span>✦</span><h3>Custom Details</h3><ul><li>Special requests</li><li>Priority rooms</li><li>Pet considerations</li><li>Extra attention</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas">
+      <div class="container areas-grid">
+        <div class="area-cloud" aria-label="Service area graphic">
+          <div class="area-core">Draper<br>Utah</div>
+          <span class="area-tag">Sandy</span>
+          <span class="area-tag">South Jordan</span>
+          <span class="area-tag">Lehi</span>
+          <span class="area-tag">Riverton</span>
+          <span class="area-tag">Bluffdale</span>
+          <span class="area-tag">Herriman</span>
+          <span class="area-tag">Midvale</span>
+          <span class="area-tag">Highland</span>
+        </div>
+
+        <div>
+          <span class="eyebrow">Where we go</span>
+          <h2>Proudly cleaning around Draper.</h2>
+          <p style="margin-top: 24px">
+            We serve homes within approximately a 35-minute driving radius of Draper. Farther appointments may depend on traffic, scheduling, and availability.
+          </p>
+          <ul class="area-list">
+            <li>Draper</li><li>Sandy</li><li>South Jordan</li><li>Riverton</li>
+            <li>Bluffdale</li><li>Midvale</li><li>Cottonwood Heights</li>
+            <li>West Jordan</li><li>Herriman</li><li>Lehi</li>
+            <li>Highland</li><li>American Fork</li><li>Murray</li><li>Holladay</li>
+          </ul>
+          <p><strong>Not sure if you are inside our service area?</strong> Send us your ZIP code and we will confirm availability.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container faq-grid">
+        <div>
+          <span class="eyebrow">Frequently asked</span>
+          <h2>Questions, answered.</h2>
+        </div>
+
+        <div class="accordion">
+          <div class="faq-item open">
+            <button class="faq-question">What areas do you serve?<span>+</span></button>
+            <div class="faq-answer"><p>We primarily serve Draper and nearby communities within roughly a 35-minute drive. Send us your ZIP code to confirm.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How much does a cleaning cost?<span>+</span></button>
+            <div class="faq-answer"><p>Pricing depends on the size and condition of your home, the service requested, and any special priorities. We provide personalized quotes.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do you provide cleaning supplies?<span>+</span></button>
+            <div class="faq-answer"><p>This policy is still being finalized. Please ask when requesting your quote so we can confirm what will be provided.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do I need to be home?<span>+</span></button>
+            <div class="faq-answer"><p>Not necessarily. Access arrangements can be discussed when your booking is confirmed.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do you offer recurring cleaning?<span>+</span></button>
+            <div class="faq-answer"><p>Yes, depending on current availability. Weekly, biweekly, and monthly options may be available.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">Do you clean homes with pets?<span>+</span></button>
+            <div class="faq-answer"><p>Yes. Let us know about your pets when requesting a quote so we can plan accordingly.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">How do I receive my quote?<span>+</span></button>
+            <div class="faq-answer"><p>Submit the form below with details about your home. We will contact you to discuss your needs, availability, and pricing.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section" id="quote">
+      <div class="container quote-grid">
+        <div>
+          <span class="eyebrow">Free personalized quote</span>
+          <h2>Tell us about your space.</h2>
+          <p style="margin-top: 24px">Share a few details and we will follow up to discuss availability, priorities, and your custom quote.</p>
+        </div>
+
+        <form class="quote-card" id="quoteForm">
+          <div class="form-grid">
+            <div class="field"><label for="name">Full name</label><input id="name" required></div>
+            <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" required></div>
+            <div class="field"><label for="email">Email address</label><input id="email" type="email" required></div>
+            <div class="field"><label for="city">City</label><input id="city" required></div>
+            <div class="field"><label for="zip">ZIP code</label><input id="zip" required></div>
+            <div class="field">
+              <label for="property">Property type</label>
+              <select id="property" required>
+                <option value="">Choose one</option>
+                <option>House</option><option>Apartment</option><option>Townhome</option><option>Condo</option><option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="service">Service requested</label>
+              <select id="service" required>
+                <option value="">Choose one</option>
+                <option>Standard Cleaning</option><option>Deep Cleaning</option><option>Move-In Cleaning</option><option>Move-Out Cleaning</option><option>Recurring Cleaning</option><option>Custom Request</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="frequency">Frequency</label>
+              <select id="frequency">
+                <option>One-time</option><option>Weekly</option><option>Biweekly</option><option>Monthly</option>
+              </select>
+            </div>
+            <div class="field"><label for="bedrooms">Bedrooms</label><input id="bedrooms" type="number" min="0"></div>
+            <div class="field"><label for="bathrooms">Bathrooms</label><input id="bathrooms" type="number" min="0" step=".5"></div>
+            <div class="field full"><label for="notes">Tell us about your home and priorities</label><textarea id="notes" placeholder="Square footage, current condition, pets, preferred date, special requests, or anything else we should know."></textarea></div>
+          </div>
+
+          <p class="form-note">This demo form validates on the front end but does not send an email until you connect a form service.</p>
+          <button class="btn btn-primary" type="submit">Request My Free Quote</button>
+          <div class="success" id="successMessage">Thank you! We received your request and will contact you to discuss availability and your personalized quote.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--aqua)">Your clean-home era starts here</span>
+        <h2>Ready to come home to clean?</h2>
+        <p>Tell us about your space and we will create a cleaning plan that fits your home, schedule, and priorities.</p>
+        <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo"><span class="logo-mark"></span>Scrub Club 801</div>
+          <p style="margin-top: 18px">Locally owned by Nella + Baylee.</p>
+        </div>
+        <div>
+          <div class="footer-title">Explore</div>
+          <div class="footer-links">
+            <a href="#about">About</a><a href="#services">Services</a><a href="#areas">Service Areas</a><a href="#faq">FAQs</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">Contact</div>
+          <div class="footer-links">
+            <a href="mailto:hello@scrubclub801.us">hello@scrubclub801.us</a>
+            <a href="tel:+18015550101">(801) 555-0101</a>
+            <a href="#">Instagram</a>
+            <a href="#">TikTok</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">Legal</div>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#quote">Request a Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">© 2026 Scrub Club 801. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.parentElement;
+        item.classList.toggle("open");
+        button.querySelector("span").textContent = item.classList.contains("open") ? "−" : "+";
+      });
+    });
+
+    document.getElementById("quoteForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+
+      document.getElementById("successMessage").style.display = "block";
+      this.reset();
+    });
+  </script>
+</body>
+</html>
